@@ -1,0 +1,7 @@
+# Extension
+*.o
+
+# Directory
+mlx-linux/
+minilibx-linux/
+obj/

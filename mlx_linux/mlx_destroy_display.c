@@ -1,31 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   mlx_destroy_display.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 19:17:47 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/02/20 16:10:18 by ozasahin         ###   ########.fr       */
+/*   Created: 2020/10/03 18:56:35 by mg                #+#    #+#             */
+/*   Updated: 2024/02/20 15:12:20 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include "mlx_int.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include "../libft/libft.h"
-# include "../mlx_linux/mlx.h"
-
-# define WIDTH 1920
-# define HEIGHT 1080
-
-typedef struct s_data
+int	mlx_destroy_display(t_xvar *xvar)
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-}	t_data;
-
-#endif
+	XCloseDisplay(xvar->display);
+}
