@@ -1,8 +1,10 @@
 # Executable
 fdf
+mlx-test
 
 # Extension
 *.o
+*.a
 
 # Directory
 mlx-linux/
