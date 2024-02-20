@@ -6,7 +6,7 @@
 #    By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/13 19:03:54 by ozasahin          #+#    #+#              #
-#    Updated: 2024/02/20 16:12:54 by ozasahin         ###   ########.fr        #
+#    Updated: 2024/02/20 16:15:56 by ozasahin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,11 +28,11 @@ LINKS		=	-Llibft -lft -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
 RM			=	rm -f
 
 # Colors
-COLOR_RESET		=\033[0m
-COLOR_RED		=\033[0;31m
-COLOR_GREEN		=\033[0;32m
-COLOR_PURPLE	=\033[0;95m
-COLOR_BLUE		=\033[0;34m
+COLOR_RESET			=	\033[0m
+COLOR_RED			=	\033[0;31m
+COLOR_GREEN			=	\033[0;32m
+COLOR_PURPLE		=	\033[0;95m
+COLOR_BLUE			=	\033[0;34m
 
 # Colored Messages
 MESSAGE_COMPILE		=	$(COLOR_BLUE)Compiling the program...$(COLOR_RESET)
