@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_octet.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 14:23:41 by justo             #+#    #+#             */
-/*   Updated: 2024/02/21 12:45:32 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/02/21 17:52:23 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	*run_read(int fd, char *line, char *buffer)
 	return (NULL);
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line_octet(int fd, int *octet)
 {
 	static t_id	buffer_memory[MAX_ID];
 	char		*line;
@@ -106,27 +106,6 @@ char	*get_next_line(int fd)
 		return (free(line), NULL);
 	if (there_is_a_line(line) > 0)
 		return (line);
+	octet = ft_strlen(run_read(fd, line, buffer));
 	return (run_read(fd, line, buffer));
 }
-
-// #include <stdio.h>
-// #include <fcntl.h>
-
-// int main(int argc, char **argv)
-// {
-// 	char	*line;
-// 	int		fd;
-
-// 	if (argc != 2)
-// 		return 1;
-// 	fd = open(argv[1], O_RDONLY);
-// 	if (fd == -1)
-// 		return 1;
-// 	while ((line = get_next_line(fd)) != NULL)
-// 	{
-// 		printf("line = %s", line);
-// 		free(line);
-// 	}
-// 	close(fd);
-// 	return 0;
-// }

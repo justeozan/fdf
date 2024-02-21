@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:21:30 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/02/13 16:22:08 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/02/21 17:44:44 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_id
 	char	buffer[BUFFER_SIZE + 1];
 }	t_id;
 
+char	*get_next_line_octet(int fd, int *octet);
 char	*extract_the_line(char *line, char *buffer, int len);
 size_t	there_is_a_line(char *str);
 int		update_gnl(char *newbuffer, char *buffer, char **line);
@@ -51,6 +52,7 @@ char	*get_next_line(int fd);
 size_t	ft_strlen_gnl(char *str);
 char	*str_init(char *s);
 char	*buffer_init(int id, t_id *buffer_memory);
+
 /*-------------is-------------*/
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
