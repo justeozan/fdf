@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free2d.c                                        :+:      :+:    :+:   */
+/*   free_fdf.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 15:25:31 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/02/23 11:51:09 by ozasahin         ###   ########.fr       */
+/*   Created: 2024/02/23 15:09:36 by ozasahin          #+#    #+#             */
+/*   Updated: 2024/02/23 16:40:44 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libft.h"
+#include "../include/fdf.h"
 
-void	ft_free2d(char ***strs)
+void	free_data(void *ptr)
 {
-	unsigned int	i;
+	t_fdf	*data;
 
-	i = 0;
-	while ((*strs)[i])
-		free((*strs)[i++]);
-	free(*strs);
-	(*strs) = NULL;
+	data = (t_fdf *)ptr;
+	if (data)
+	{
+		if (data->mlx_ptr)
+			free(data->mlx_ptr);
+		if (data->win_ptr)
+			free(data->win_ptr);
+		free(data);
+	}
+	free(ptr);
 }
+
+// void	free2d_exit(t_fdf ***matrix, int height)
+// {
+// 	ft_free_matrix((void ***)matrix, height, &free_data);
+// 	ft_print_err("Error. Stoped.\n");
+// }

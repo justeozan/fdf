@@ -5,6 +5,7 @@ mlx-test
 # Extension
 *.o
 *.a
+*.json
 
 # Directory
 mlx-linux/

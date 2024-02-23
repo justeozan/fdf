@@ -6,69 +6,105 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:23:20 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/02/21 17:59:31 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/02/23 19:25:43 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-int	get_height(char *file_name)
+void	display_matrix(t_fdf **matrix, int w, int h)
 {
-	int	fd;
-	int	height;
+	int	x;
+	int	y;
 
-	fd = open(file_name, O_RDONLY);
-	height = 0;
-	while (get_next_line_octet(fd, NULL))
-		height++;
-	close(fd);
-	return (height);
+	x = -1;
+	ft_printf(" ");
+	while (++x < w)
+	{
+		if (x < 10)
+			ft_printf("  %d", x);
+		else
+			ft_printf(" %d", x);
+	}
+	y = -1;
+	while (++y < h)
+	{
+		ft_printf("\n%d", y);
+		x = -1;
+		while (++x < w)
+		{
+			if (matrix[y][x].z < 10 && !(y >= 10 && x == 0))
+				ft_printf("  ");
+			else
+				ft_printf(" ");
+			ft_printf("%d", matrix[y][x].z);
+		}
+	}
+	ft_printf("\n--\n");
 }
 
-void	set_size_matrix(t_data *matrix, char *file_mame)
+void	fill_matrix(t_fdf ***matrix, char *file_name, int w, int h)
 {
-	// int	octet;
-	// int	y;
-	int	height;
+	char	**splitted_line;
+	int		fd;
+	int		x;
+	int		y;
+
+	fd = open(file_name, O_RDONLY);
+	y = 0;
+	splitted_line = ft_split(get_next_line(fd), ' ');
+	while ((splitted_line || y == 0) && y < h)
+	{
+		x = -1;
+		while (splitted_line[++x] && x < w)
+		{
+			// ft_printf("w=%d\th=%d\tx = %d\ty = %d\tz = -\n", w, h, x, y);
+			(*matrix)[y][x].x = x;
+			(*matrix)[y][x].y = y;
+			(*matrix)[y][x].z = ft_atoi(splitted_line[x]);
+		}
+		y++;
+		ft_free2d(&splitted_line);
+		splitted_line = ft_split(get_next_line(fd), ' ');
+	}
+	if (!splitted_line && y < h - 1)
+	{
+		ft_free2d(&splitted_line);
+		ft_print_err("Error. f2");
+	}
+	close(fd);
+	display_matrix(*matrix, w, h);
+}
+
+void	set_size_matrix(t_fdf ***matrix, char *file_name, int *w, int *h)
+{
+	int	fd;
+	int	i;
 	
-	// y = 0;
-	height = get_height(file_mame);
-	free(matrix);
-	ft_printf("height = %d", height);
-	// octet = get_next_line_octet(fd);
-	// while (octet > 0)
-	// {
-	// 	octet = get_next_line_octet(fd);
-	// 	y++;
-	// }
+	fd = open(file_name, O_RDONLY);
+	*w = get_width(get_next_line(fd));
+	close(fd);
+	*h = get_height(file_name);
+	ft_printf("width = %d\theight = %d\n--\n", *w, *h);
+	(*matrix) = (t_fdf **)malloc(sizeof(t_fdf *) * (*h));
+	if (!(*matrix))
+		return ;
+	i = -1;
+	while (++i < *h)
+	{
+		(*matrix)[i] = (t_fdf *)malloc(sizeof(t_fdf) * (*w));
+		if (!((*matrix)[i]))
+			ft_fmxe_((void ***)matrix, *h, &free_data, "Error. f1\n");
+	}
 }
 
 void	fdf(char *file_name)
 {
-	t_data	*matrix;
+	t_fdf	**matrix;
+	int		width;
+	int		height;
 
-	matrix = (t_data *)malloc(sizeof(t_data));
-	if (!matrix)
-		return ;
-	set_size_matrix(matrix, file_name);
-}
-
-int	main(int ac, char **av)
-{
-	int	fd;
-
-	if (ac == 2)
-	{
-		if (!ft_strnstr(av[1], ".fdf", ft_strlen(av[1])))
-			ft_print_err("Error! \".fdf\" is needed\n");
-		ft_printf("it's a .fdf file all right\n");
-		fd = open(av[1], O_RDONLY);
-		if (fd <= 0)
-			ft_print_err("Error! bad fd or file empty\n");
-		ft_printf("file is not empty, fd = %d\n", fd);
-		fdf(av[1]);
-	}
-	else
-		ft_printf("Notice : ./fdf <maps.fdf>\n");
-	return (0);
+	set_size_matrix(&matrix, file_name, &width, &height);
+	// display_matrix(matrix, width, height);
+	fill_matrix(&matrix, file_name, width, height);
 }

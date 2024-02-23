@@ -6,7 +6,7 @@
 #    By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/13 16:43:33 by ozasahin          #+#    #+#              #
-#    Updated: 2024/02/21 12:46:54 by ozasahin         ###   ########.fr        #
+#    Updated: 2024/02/23 16:00:13 by ozasahin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS	=	\
 			file/ft_putnbr_fd.c\
 			file/ft_putstr_fd.c\
 			\
+			free/ft_free_matrix.c\
 			free/ft_free2d.c\
 			\
 			gnl/get_next_line_utils.c\
