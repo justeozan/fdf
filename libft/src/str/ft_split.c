@@ -58,7 +58,7 @@ static char	*create_subchain(char *s, char c)
 		len++;
 	str = (char *)malloc((len + 1) * sizeof(char));
 	if (!str)
-		return (NULL);
+		return (free(str), NULL);
 	while (s[i] && s[i] != c)
 	{
 		str[i] = s[i];
@@ -109,6 +109,7 @@ char	**ft_split(const char *s, char c)
 		return (NULL);
 	if (!create_strs(s, strs, c))
 	{
+		free_subs(strs, len_subchain);
 		free(strs);
 		strs = NULL;
 	}

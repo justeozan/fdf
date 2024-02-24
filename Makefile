@@ -24,7 +24,7 @@ OBJDIR		=	obj
 OBJ			=	$(patsubst src/%.c, obj/%.o, $(SRC))
 
 # Controls
-CC			=	gcc
+CC			=	gcc -g
 CFLAGS		=	-Wall -Wextra -Werror
 # INCLUDES	=	-Iinclude -Ilibft -Imlx_linux
 INCLUDES	=	-Iinclude -Ilibft

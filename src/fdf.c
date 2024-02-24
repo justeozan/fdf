@@ -78,6 +78,8 @@ void	fill_matrix(t_matrix ***matrix, char *file_name, int w, int h)
 		ft_free2d(&splitted_line);
 		ft_print_err("Error. f2");
 	}
+	else
+		ft_free2d(&splitted_line);
 	// if (splitted_line)
 	// 	ft_free2d(&splitted_line);
 	close(fd);
