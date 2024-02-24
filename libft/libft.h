@@ -27,7 +27,7 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char *s, int fd);
 /*-------------free-------------*/
-void	ft_free_matrix(void ***matrix, int width, void (*free_func)(void *));
+void	ft_free_matrix(void ***matrix, int height, void (*free_func)(void *));
 void	ft_free_matrix_(void ***matrix, int height, void (*free_func)(void *));
 void	ft_fmxe(void ***matrix, int h, void (*f)(void *), char *err_txt);
 void	ft_fmxe_(void ***matrix, int h, void (*f)(void *), char *err_txt);
@@ -100,7 +100,7 @@ void	ft_print_char(int c, size_t *octet);
 void	print_var(char offset, va_list arg, size_t *octet);
 int		ft_printf(const char *entry, ...);
 /*-------------str-------------*/
-char	**ft_split(char const *s, char c);
+char	**ft_split(const char *s, char c); //const
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *str);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));

@@ -23,6 +23,7 @@ static void	free_subs(char **strs, size_t nb_subs)
 		strs[i] = NULL;
 		i++;
 	}
+	strs = NULL;
 }
 
 static int	count_subchain(char *s, char c)
@@ -95,7 +96,7 @@ static int	create_strs(char const *s, char **strs, char c)
 	return (1);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(const char *s, char c)
 {
 	char	**strs;
 	size_t	len_subchain;
@@ -111,5 +112,18 @@ char	**ft_split(char const *s, char c)
 		free(strs);
 		strs = NULL;
 	}
+	// free(s);
 	return (strs);
 }
+
+// int	main(int ac, char **av)
+// {
+// 	char **split;
+
+// 	if (ac == 3)
+// 	{
+// 		split = ft_split(av[1], av[2][0]);
+// 	}
+// 	ft_free2d(&split);
+// 	return (0);
+// }

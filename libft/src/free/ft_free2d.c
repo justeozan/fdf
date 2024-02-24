@@ -17,8 +17,13 @@ void	ft_free2d(char ***strs)
 	unsigned int	i;
 
 	i = 0;
+	if (strs == NULL || *strs == NULL)
+		return ;
 	while ((*strs)[i])
-		free((*strs)[i++]);
+	{
+		free((*strs)[i]);
+		(*strs)[i] = NULL;
+	}
 	free(*strs);
 	(*strs) = NULL;
 }

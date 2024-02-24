@@ -18,12 +18,15 @@ void	ft_free_matrix(void ***matrix, int height, void (*free_func)(void *))
 	int	i;
 
 	i = 0;
+	if (!(*matrix) || !matrix)
+		return ;
 	while (i < height)
 	{
 		free_func((*matrix)[i++]);
 	}
 	free(*matrix);
 	(*matrix) = NULL;
+	matrix = NULL;
 }
 
 // With Comments
@@ -32,15 +35,15 @@ void	ft_free_matrix_(void ***matrix, int height, void (*free_func)(void *))
 	int	i;
 
 	i = 0;
-	ft_printf("--\nTry to free 2d structure:\n");
+	// ft_printf("--\nTry to free 2d structure:\n");
 	while (i < height)
 	{
 		free_func((*matrix)[i++]);
-		ft_printf("matrix[%d] = %s\n", i - 1, (char *)(*matrix)[i]);
+		// ft_printf("matrix[%d] = %s\n", i - 1, (char *)(*matrix)[i]);
 	}
 	free(*matrix);
 	(*matrix) = NULL;
-	ft_printf("matrix = %s\n", (char **)(*matrix));
+	// ft_printf("matrix = %s\n", (char **)(*matrix));
 }
 
 // fmxe = free matrix and error

@@ -26,8 +26,10 @@ OBJ			=	$(patsubst src/%.c, obj/%.o, $(SRC))
 # Controls
 CC			=	gcc
 CFLAGS		=	-Wall -Wextra -Werror
-INCLUDES	=	-Iinclude -Ilibft -Imlx_linux
-LINKS		=	-Llibft -lft -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
+# INCLUDES	=	-Iinclude -Ilibft -Imlx_linux
+INCLUDES	=	-Iinclude -Ilibft
+# LINKS		=	-Llibft -lft -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
+LINKS		=	-Llibft -lft
 RM			=	rm -f
 
 # Colors
@@ -58,17 +60,17 @@ $(OBJDIR):
 clean:
 		@$(RM) -r $(OBJDIR)
 		@make clean -C libft -s
-		@make clean -C mlx_linux -s
+# @make clean -C mlx_linux -s
 		@echo "$(MESSAGE_CLEAN_DONE)"
 
 fclean:		clean
 		@$(RM) $(NAME)
 		@make fclean -C libft -s
-		@make clean -C mlx_linux -s
+# @make clean -C mlx_linux -s
 
 force:
 		@make -C libft -s
-		@make -C mlx_linux -s
+# @make -C mlx_linux -s
 
 re:		fclean all
 

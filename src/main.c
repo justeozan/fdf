@@ -15,6 +15,7 @@
 int	main(int ac, char **av)
 {
 	int	fd;
+	// int	check_err;
 
 	if (ac == 2)
 	{
@@ -26,8 +27,23 @@ int	main(int ac, char **av)
 			ft_print_err("Error! bad fd or file empty\n");
 		// ft_printf("file is not empty, fd = %d\n", fd);
 		fdf(av[1]);
+		// if (check_err < 0)
+		// 	return (check_err);
 	}
 	else
 		ft_printf("Notice : ./fdf <maps.fdf>\n");
+	close(fd);
 	return (0);
 }
+
+// int main(int ac, char **av)
+// {
+// 	char **split;
+
+// 	if (ac == 2)
+// 	{
+// 		split = ft_split(av[1], ' ');
+// 	}
+// 	ft_free2d(&split);
+// 	return (0);
+// }

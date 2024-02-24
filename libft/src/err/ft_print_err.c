@@ -17,3 +17,12 @@ void	ft_print_err(char *err_txt)
 	ft_putstr_fd(err_txt, 2);
 	exit(EXIT_FAILURE);
 }
+
+// int main(int ac, char **av)
+// {
+// 	if (ac == 2)
+// 	{
+// 		ft_print_err(av[1]);
+// 	}
+// 	return (0);
+// }

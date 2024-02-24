@@ -25,9 +25,8 @@ void	ft_display_tab2d(char **strs)
 			ft_printf("%c-", strs[i][j]);
 		ft_printf("\n");
 	}
+	// ft_free2d(&strs);
 }
-
-
 
 int	get_width(char *line)
 {
@@ -38,22 +37,30 @@ int	get_width(char *line)
 	i = 0;
 	while (line[i] != '\0')
 	{
-		if (line[i] != ' ' && (line[i - 1] == ' ' || i - 1 < 0))
+		if (line[i] != ' ' && (i == 0 || line[i - 1] == ' '))
 			count++;
 		i++;
 	}
+	free(line);
 	return (count);
 }
 
 int	get_height(char *file_name)
 {
-	int	fd;
-	int	height;
+	int		fd;
+	int		height;
+	char	*line;
 
 	fd = open(file_name, O_RDONLY);
 	height = 0;
-	while (get_next_line(fd))
+	line = get_next_line(fd);
+	while (line)
+	{
 		height++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	free(line);
 	close(fd);
 	return (height);
 }

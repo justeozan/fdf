@@ -22,27 +22,33 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 
-typedef struct s_fdf
+typedef struct s_matrix
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
 	int		x;
 	int		y;
 	int		z;
-}	t_fdf;
+}	t_matrix;
 
+// typedef struct s_fdf
+// {
+// 	void	*mlx_ptr;
+// 	void	*win_ptr;
+// 	// int		x;
+// 	// int		y;
+// 	// int		z;
+// }	t_fdf;
 
 /*-------------fdf_utils-------------*/
-char	*double_split(char *line, char c);
 int		get_width(char *line);
 int		get_height(char *file_name);
 /*-------------fdf-------------*/
 // void	fill_matrix(t_fdf ***matrix, char **map);
-void	fill_matrix(t_fdf ***matrix, char *file_name, int w, int h);
-void	set_size_matrix(t_fdf ***matrix, char *file_name, int *width, int *height);
+void	fill_matrix(t_matrix ***matrix, char *file_name, int w, int h);
+void	set_size_matrix(t_matrix ***matrix, char *file_name, int *width, int *height);
 void	fdf(char *file_name);
 /*-------------free_fdf-------------*/
-void	free_data(void *ptr);
+void	free_mx_data(void *ptr);
+// void	free_fdf_data(void *ptr);
 // void	free2d_exit(t_fdf ***matrix, int height);
 /*-------------main-------------*/
 // Not needed
