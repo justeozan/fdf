@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 23:51:39 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/02/13 16:58:16 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/02/25 16:43:45 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ char	**ft_split(const char *s, char c)
 		free(strs);
 		strs = NULL;
 	}
-	// free(s);
 	return (strs);
 }
 

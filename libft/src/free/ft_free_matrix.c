@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:25:31 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/02/23 16:08:29 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/02/25 16:43:06 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,15 @@ void	ft_free_matrix_(void ***matrix, int height, void (*free_func)(void *))
 	int	i;
 
 	i = 0;
-	// ft_printf("--\nTry to free 2d structure:\n");
+	ft_printf("--\nTry to free 2d structure:\n");
 	while (i < height)
 	{
 		free_func((*matrix)[i++]);
-		// ft_printf("matrix[%d] = %s\n", i - 1, (char *)(*matrix)[i]);
+		ft_printf("matrix[%d] = %s\n", i - 1, (char *)(*matrix)[i]);
 	}
 	free(*matrix);
 	(*matrix) = NULL;
-	// ft_printf("matrix = %s\n", (char **)(*matrix));
+	ft_printf("matrix = %s\n", (char **)(*matrix));
 }
 
 // fmxe = free matrix and error

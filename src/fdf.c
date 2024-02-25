@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:23:20 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/02/23 19:25:43 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/02/25 17:03:54 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ void	display_matrix(t_matrix **matrix, int w, int h)
 	int	x;
 	int	y;
 
-	x = -1;
+	if (!matrix || !(*matrix) || w < 0 || h < 0)
+		ft_print_err("Error! display_matrix: matrix is NULL\n");
 	ft_printf(" ");
+	x = -1;
 	while (++x < w)
 	{
 		if (x < 10)
@@ -41,7 +43,7 @@ void	display_matrix(t_matrix **matrix, int w, int h)
 		}
 	}
 	ft_printf("\n--\n");
-	ft_free_matrix((void ***)&matrix, h, &free_mx_data);
+	// ft_free_matrix((void ***)&matrix, h, &free_mx_data);
 }
 
 void	fill_matrix(t_matrix ***matrix, char *file_name, int w, int h)
@@ -53,14 +55,14 @@ void	fill_matrix(t_matrix ***matrix, char *file_name, int w, int h)
 	char	*line;
 
 	fd = open(file_name, O_RDONLY);
-	y = 0;
 	line = get_next_line(fd);
 	splitted_line = ft_split(line , ' ');
 	free(line);
-	while ((splitted_line || y == 0) && y < h)
+	y = 0;
+	while (splitted_line && y < h)
 	{
 		x = -1;
-		while (x < w && splitted_line[++x])
+		while (++x < w && splitted_line[x])
 		{
 			// ft_printf("w=%d\th=%d\tx = %d\ty = %d\tz = -\n", w, h, x, y);
 			(*matrix)[y][x].x = x;
@@ -76,16 +78,10 @@ void	fill_matrix(t_matrix ***matrix, char *file_name, int w, int h)
 	if (y < h - 1 && !splitted_line)
 	{
 		ft_free2d(&splitted_line);
-		ft_print_err("Error. f2");
+		ft_print_err("Error. fill_matrix:a line was splitted bad\n");
 	}
-	else
-		ft_free2d(&splitted_line);
-	// if (splitted_line)
-	// 	ft_free2d(&splitted_line);
+	ft_free2d(&splitted_line);
 	close(fd);
-	// display_matrix(*matrix, w, h);
-	// free(splitted_line);
-	// splitted_line = NULL;
 }
 
 void	set_size_matrix(t_matrix ***matrix, char *file_name, int *w, int *h)
@@ -94,16 +90,17 @@ void	set_size_matrix(t_matrix ***matrix, char *file_name, int *w, int *h)
 	int	i;
 	
 	fd = -1;
-	if (!matrix || !(*matrix))
-		return ;
+	// if (!matrix || !(*matrix))
+	// 	ft_print_err("Error. f1\n");
 	fd = open(file_name, O_RDONLY);
 	if (fd < 1)
-		ft_print_err("Error. f1");
+		ft_print_err("Error. f1\n");
 	*w = get_width(get_next_line(fd));
 	close(fd);
 	*h = get_height(file_name);
 	if (*w < 0 || *h < 0)
-		return ;
+		ft_print_err("Error. f1\n");
+
 	// ft_printf("width = %d\theight = %d\n--\n", *w, *h);
 	(*matrix) = (t_matrix **)malloc(sizeof(t_matrix *) * (*h));
 	if (!(*matrix))
@@ -115,7 +112,6 @@ void	set_size_matrix(t_matrix ***matrix, char *file_name, int *w, int *h)
 		if (!((*matrix)[i]))
 			ft_fmxe((void ***)matrix, *h, &free_mx_data, "Error. f1\n");
 	}
-	return ;
 }
 
 // void	init_matrix(t_fdf fdf)
@@ -138,8 +134,7 @@ void	fdf(char *file_name)
 	width = 0;
 	height = 0;
 	set_size_matrix(&matrix, file_name, &width, &height);
-	// display_matrix(matrix, width, height);
 	fill_matrix(&matrix, file_name, width, height);
+	display_matrix(matrix, width, height);
 	ft_free_matrix((void ***)&matrix, height, &free_mx_data);
-	// return ;
 }
