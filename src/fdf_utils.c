@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:11:35 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/02/23 17:56:27 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:48:26 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	get_height(char *file_name)
 
 	fd = open(file_name, O_RDONLY);
 	height = 0;
-	line = get_next_line(fd);
+	line = get_next_line(fd, &line);
 	while (line)
 	{
 		height++;

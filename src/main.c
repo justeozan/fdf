@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:07:35 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/02/26 13:07:49 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:21:39 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int ac, char **av)
 // 	char	**split;
 // 	char	*line;
 // 	int		fd;
-
+//
 // 	if (ac == 2)
 // 	{
 // 		fd = open(av[1], O_RDONLY);

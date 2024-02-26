@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display.c                                          :+:      :+:    :+:   */
+/*   displays.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:36:57 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/02/26 11:37:27 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:26:50 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,7 @@ void	display_matrix(t_matrix **matrix, int w, int h)
 	ft_printf(" ");
 	x = -1;
 	while (++x < w)
-	{
-		if (x < 10)
-			ft_printf("  %d", x);
-		else
-			ft_printf(" %d", x);
-	}
+		(x < 10) ? ft_printf("  %d", x): ft_printf(" %d", x);
 	y = -1;
 	while (++y < h)
 	{
@@ -36,12 +31,10 @@ void	display_matrix(t_matrix **matrix, int w, int h)
 		while (++x < w)
 		{
 			if (!(y >= 10 && x == 0) && matrix[y][x].z < 10)
-				ft_printf("  ");
+				ft_printf("  %d", matrix[y][x].z);
 			else
-				ft_printf(" ");
-			ft_printf("%d", matrix[y][x].z);
+				ft_printf(" %d", matrix[y][x].z);
 		}
 	}
 	ft_printf("\n--\n");
-	// ft_free_matrix((void **)matrix, h, &free_mx_data);
 }
