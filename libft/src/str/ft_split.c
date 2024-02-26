@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 23:51:39 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/02/26 10:37:40 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/02/26 11:42:29 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static char	*create_subchain(char *s, char c)
 		len++;
 	str = (char *)malloc((len + 1) * sizeof(char));
 	if (!str)
-		return (NULL); //
+		return (NULL);
 	while (s[i] && s[i] != c)
 	{
 		str[i] = s[i];
@@ -97,7 +97,7 @@ static int	create_strs(char const *s, char **strs, char c)
 	return (1);
 }
 
-char	**ft_split(const char *s, char c)
+char	**ft_split(char *s, char c)
 {
 	char	**strs;
 	size_t	len_subchain;

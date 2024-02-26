@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:17:47 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/02/25 15:53:41 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/02/26 11:44:16 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct s_matrix
 // 	// int		z;
 // }	t_fdf;
 
+/*-------------displays-------------*/
+void	display_matrix(t_matrix **matrix, int w, int h);
 /*-------------fdf_utils-------------*/
 int		get_width(char *line);
 int		get_height(char *file_name);

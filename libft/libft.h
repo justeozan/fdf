@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:21:30 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/02/26 10:36:19 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/02/26 11:42:45 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char *s, int fd);
 /*-------------free-------------*/
-void	ft_free_matrix(void ***matrix, int height, void (*free_func)(void *));
-void	ft_free_matrix_(void ***matrix, int height, void (*free_func)(void *));
-void	ft_fmxe(void ***matrix, int h, void (*f)(void *), char *err_txt);
-void	ft_fmxe_(void ***matrix, int h, void (*f)(void *), char *err_txt);
+void	ft_free_matrix(void **matrix, int height, void (*free_func)(void *));
+void	ft_free_matrix_(void **matrix, int height, void (*free_func)(void *));
+void	ft_fmxe(void **matrix, int h, void (*f)(void *), char *err_txt);
+void	ft_fmxe_(void **matrix, int h, void (*f)(void *), char *err_txt);
 void	ft_free2d(char ***strs);
 void	ft_freen2d(char **strs, size_t nb_subs);
 /*-------------gnl-------------*/
@@ -101,7 +101,7 @@ void	ft_print_char(int c, size_t *octet);
 void	print_var(char offset, va_list arg, size_t *octet);
 int		ft_printf(const char *entry, ...);
 /*-------------str-------------*/
-char	**ft_split(const char *s, char c); //const
+char	**ft_split(char *s, char c); //const
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *str);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));

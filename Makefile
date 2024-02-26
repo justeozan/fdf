@@ -6,7 +6,7 @@
 #    By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/13 19:03:54 by ozasahin          #+#    #+#              #
-#    Updated: 2024/02/23 15:16:47 by ozasahin         ###   ########.fr        #
+#    Updated: 2024/02/26 11:44:32 by ozasahin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@
 NAME	=	fdf
 
 SRC		=	\
+			src/displays.c\
 			src/fdf_utils.c\
 			src/fdf.c\
 			src/free_fdf.c\
