@@ -53,7 +53,7 @@ int	get_height(char *file_name)
 
 	fd = open(file_name, O_RDONLY);
 	height = 0;
-	line = get_next_line(fd, &line);
+	line = get_next_line(fd);
 	while (line)
 	{
 		height++;

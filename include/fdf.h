@@ -29,14 +29,14 @@ typedef struct s_matrix
 	int		z;
 }	t_matrix;
 
-// typedef struct s_fdf
-// {
-// 	void	*mlx_ptr;
-// 	void	*win_ptr;
-// 	// int		x;
-// 	// int		y;
-// 	// int		z;
-// }	t_fdf;
+typedef struct s_fdf
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	// int		x;
+	// int		y;
+	// int		z;
+}	t_fdf;
 
 /*-------------displays-------------*/
 void	display_matrix(t_matrix **matrix, int w, int h);

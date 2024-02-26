@@ -81,13 +81,16 @@ void	set_size_matrix(t_matrix ***matrix, char *file_name, int *w, int *h)
 void	fdf(char *file_name)
 {
 	t_matrix	**matrix;
-	// t_fdf		fdf;
+	t_fdf		fdf;
 	int			width;
 	int			height;
 
 	matrix = NULL;
 	width = 0;
 	height = 0;
+	fdf.mlx_ptr = mlx_init();
+	if (!fdf.mlx_ptr)
+			ft_fmxe((void **)matrix, height, &free_mx_data, "Error. fdf\n");
 	set_size_matrix(&matrix, file_name, &width, &height);
 	fill_matrix_parent(matrix, file_name, width, height);
 	display_matrix(matrix, width, height);
