@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:21:30 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/02/26 11:42:45 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:12:07 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	ft_free_matrix(void **matrix, int height, void (*free_func)(void *));
 void	ft_free_matrix_(void **matrix, int height, void (*free_func)(void *));
 void	ft_fmxe(void **matrix, int h, void (*f)(void *), char *err_txt);
 void	ft_fmxe_(void **matrix, int h, void (*f)(void *), char *err_txt);
-void	ft_free2d(char ***strs);
+void	ft_free2d(char **strs);
+void	ft_free2d_(char ***strs);
 void	ft_freen2d(char **strs, size_t nb_subs);
 /*-------------gnl-------------*/
 # ifndef BUFFER_SIZE
@@ -117,5 +118,6 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
+
 
 #endif

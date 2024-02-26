@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:17:47 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/02/26 11:44:16 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/02/26 13:59:37 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,20 @@ int		get_height(char *file_name);
 // void	fill_matrix(t_fdf ***matrix, char **map);
 void	fill_matrix(t_matrix ***matrix, char *file_name, int w, int h);
 void	set_size_matrix(t_matrix ***matrix, char *file_name, int *width, int *height);
-void	fdf(char *file_name);
+void	fdf(char *file);
+// void	fdf(char *file_name);
 /*-------------free_fdf-------------*/
 void	free_mx_data(void *ptr);
 // void	free_fdf_data(void *ptr);
 // void	free2d_exit(t_fdf ***matrix, int height);
 /*-------------main-------------*/
 // Not needed
+
+/*-------------amandine-------------*/
+// t_matrix	**set_size_matrix(char *file_name, int *width, int *height);
+// void	free_matrix(t_matrix **matrix, int height);
+// void	ft_exit(char *msg, t_matrix **matrix, int height);
+
+
 
 #endif

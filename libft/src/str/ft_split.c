@@ -6,25 +6,11 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 23:51:39 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/02/26 11:42:29 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:19:21 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../libft.h"
-
-// static void	free_subs(char **strs, size_t nb_subs)
-// {
-// 	size_t	i;
-
-// 	i = 0;
-// 	while (i < nb_subs)
-// 	{
-// 		free(strs[i]);
-// 		strs[i] = NULL;
-// 		i++;
-// 	}
-// 	strs = NULL;
-// }
 
 static int	count_subchain(char *s, char c)
 {
@@ -83,11 +69,7 @@ static int	create_strs(char const *s, char **strs, char c)
 		{
 			strs[j] = create_subchain((char *)&s[i], c);
 			if (strs[j] == NULL)
-			{
-				// free_subs(strs, j);
-				ft_freen2d(strs, j);
-				return (0);
-			}
+				return (ft_free2d(strs), 0);
 			j++;
 		}
 		while (s[i] != c && s[i] != '\0')
@@ -111,12 +93,7 @@ char	**ft_split(char *s, char c)
 	if (!strs)
 		return (NULL);
 	if (!create_strs(s, strs, c))
-	{
-		// free_subs(strs, len_subchain);
-		ft_freen2d(strs, len_subchain);
-		free(strs);
-		strs = NULL;
-	}
+		ft_free2d(strs);
 	return (strs);
 }
 

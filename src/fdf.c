@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:23:20 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/02/26 11:37:20 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:15:10 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,17 @@ void	fill_matrix_children(t_matrix **matrix, char **splitted_line, int w, int y)
 {
 	int	x;
 	
-	x = 0;
+	x = -1;
 	if (!splitted_line | !(*splitted_line))
 		return (ft_fmxe((void **)matrix, y, free_mx_data, "Error\n"));
-	while (x < w)
+	while (++x < w)
 	{
 		matrix[y][x].x = x;
 		matrix[y][x].y = y;
 		matrix[y][x].z = ft_atoi(splitted_line[x]);
+		// ft_printf(" - \n|%d|\n|%d|\n|%d\n - \n", matrix[y][x].x, matrix[y][x].y, matrix[y][x].z);
 	}
-	ft_free2d(&splitted_line);
+	ft_free2d(splitted_line);
 }
 
 void	fill_matrix_parent(t_matrix **matrix, char *f_name, int w, int h)
@@ -59,14 +60,12 @@ void	set_size_matrix(t_matrix ***matrix, char *file_name, int *w, int *h)
 	int	i;
 	
 	fd = -1;
-	// if (!matrix || !(*matrix))
-	// 	ft_print_err("Error. f1\n");
 	fd = open(file_name, O_RDONLY);
 	if (fd < 1)
 		ft_print_err("Error. f1\n");
 	line = get_next_line(fd);
 	if (!line)
-		
+		ft_print_err("Error. f1\n");
 	*w = get_width(line);
 	close(fd);
 	*h = get_height(file_name);
