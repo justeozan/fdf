@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:23:20 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/02/25 17:03:54 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/02/26 10:38:30 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	fill_matrix(t_matrix ***matrix, char *file_name, int w, int h)
 
 	fd = open(file_name, O_RDONLY);
 	line = get_next_line(fd);
+	if (!line)
+		ft_print_err("Error. fill_matrix:a line was splitted bad\n");
 	splitted_line = ft_split(line , ' ');
 	free(line);
 	y = 0;
@@ -70,17 +72,19 @@ void	fill_matrix(t_matrix ***matrix, char *file_name, int w, int h)
 			(*matrix)[y][x].z = ft_atoi(splitted_line[x]);
 		}
 		y++;
-		ft_free2d(&splitted_line);
+		ft_freen2d(splitted_line, h);
 		line = get_next_line(fd);
+		if (!line)
+			return ;
 		splitted_line = ft_split(line, ' ');
 		free(line);
 	}
 	if (y < h - 1 && !splitted_line)
 	{
-		ft_free2d(&splitted_line);
+		ft_freen2d(splitted_line, h);
 		ft_print_err("Error. fill_matrix:a line was splitted bad\n");
 	}
-	ft_free2d(&splitted_line);
+	ft_freen2d(splitted_line, h);
 	close(fd);
 }
 

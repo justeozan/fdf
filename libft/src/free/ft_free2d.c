@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:25:31 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/02/23 11:51:09 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/02/26 10:35:48 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,20 @@ void	ft_free2d(char ***strs)
 	}
 	free(*strs);
 	(*strs) = NULL;
+}
+
+void	ft_freen2d(char **strs, size_t nb_subs)
+{
+	size_t	i;
+
+	i = 0;
+	if (strs == NULL || *strs == NULL)
+		return ;
+	while (i < nb_subs && (*strs)[i])
+	{
+		free(strs[i]);
+		strs[i] = NULL;
+	}
+	free(strs);
+	strs = NULL;
 }
