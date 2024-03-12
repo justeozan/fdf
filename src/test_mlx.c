@@ -6,11 +6,27 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:01:24 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/02/21 16:45:39 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/11 11:52:03 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fdf.h"
+// #include "../include/fdf.h"
+# include <unistd.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include "../mlx_linux/mlx.h"
+
+# define WIDTH 1920
+# define HEIGHT 1080
+
+typedef struct s_data
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	int		x;
+	int		y;
+	int		z;
+}	t_data;
 
 void	draw_line(t_data *data)
 {

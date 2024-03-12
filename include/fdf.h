@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:17:47 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/02/26 13:59:37 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/11 11:56:37 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ typedef struct s_matrix
 	int		z;
 }	t_matrix;
 
-// typedef struct s_fdf
-// {
-// 	void	*mlx_ptr;
-// 	void	*win_ptr;
-// 	// int		x;
-// 	// int		y;
-// 	// int		z;
-// }	t_fdf;
+typedef struct s_fdf
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	// int		x;
+	// int		y;
+	// int		z;
+}	t_fdf;
 
 /*-------------displays-------------*/
 void	display_matrix(t_matrix **matrix, int w, int h);

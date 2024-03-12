@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:23:20 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/02/26 14:30:39 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:00:08 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,15 @@ void	set_size_matrix(t_matrix ***matrix, char *file_name, int *w, int *h)
 	}
 }
 
+void	draw_line(t_fdf *fdf)
+{
+	
+}
+
 void	fdf(char *file_name)
 {
 	t_matrix	**matrix;
-	// t_fdf		fdf;
+	t_fdf		fdf;
 	int			width;
 	int			height;
 
@@ -92,4 +97,9 @@ void	fdf(char *file_name)
 	fill_matrix_parent(matrix, file_name, width, height);
 	display_matrix(matrix, width, height);
 	ft_free_matrix((void **)matrix, height, &free_mx_data);
+	//test
+	fdf.mlx_ptr = mlx_init();
+	fdf.win_ptr = mlx_new_window(fdf.mlx_ptr, WIDTH, HEIGHT, "fdf");
+	draw_line(&fdf);
+	mlx_loop(fdf.mlx_ptr);
 }
