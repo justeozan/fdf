@@ -80,7 +80,16 @@ void	set_size_matrix(t_matrix ***matrix, char *file_name, int *w, int *h)
 
 void	draw_line(t_fdf *fdf)
 {
-	
+	int	x;
+	int	y;
+
+	x = 100;
+	y = 100;
+	while (x < 200)
+	{
+		mlx_pixel_put(fdf->mlx_ptr, fdf->win_ptr, x, y, 0xFFFFFF);
+		x++;
+	}
 }
 
 void	fdf(char *file_name)
@@ -105,4 +114,5 @@ void	fdf(char *file_name)
 	fdf.win_ptr = mlx_new_window(fdf.mlx_ptr, WIDTH, HEIGHT, "fdf");
 	draw_line(&fdf);
 	mlx_loop(fdf.mlx_ptr);
+	// free(fdf->mlx_ptr);
 }

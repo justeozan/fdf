@@ -33,9 +33,9 @@ typedef struct s_fdf
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	// int		x;
-	// int		y;
-	// int		z;
+	int		x;
+	int		y;
+	int		z;
 }	t_fdf;
 
 /*-------------displays-------------*/
