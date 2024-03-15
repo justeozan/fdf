@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+         #
+#    By: kali <kali@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/13 19:03:54 by ozasahin          #+#    #+#              #
-#    Updated: 2024/02/26 11:44:32 by ozasahin         ###   ########.fr        #
+#    Updated: 2024/03/15 13:10:47 by kali             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,10 +27,10 @@ OBJ			=	$(patsubst src/%.c, obj/%.o, $(SRC))
 # Controls
 CC			=	gcc -g
 CFLAGS		=	-Wall -Wextra -Werror
-# INCLUDES	=	-Iinclude -Ilibft -Imlx_linux
-INCLUDES	=	-Iinclude -Ilibft
-# LINKS		=	-Llibft -lft -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
-LINKS		=	-Llibft -lft
+INCLUDES	=	-Iinclude -Ilibft -Imlx_linux
+# INCLUDES	=	-Iinclude -Ilibft
+LINKS		=	-Llibft -lft -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
+# LINKS		=	-Llibft -lft
 RM			=	rm -f
 
 # Colors
