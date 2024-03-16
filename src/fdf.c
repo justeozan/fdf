@@ -92,27 +92,45 @@ void	draw_line(t_fdf *fdf)
 	}
 }
 
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel/8));
+	*(unsigned int *)dst = color;
+}
+
 void	fdf(char *file_name)
 {
 	t_matrix	**matrix;
 	t_fdf		fdf;
 	int			width;
 	int			height;
+	//
+	t_img		img;
 
 	matrix = NULL;
 	width = 0;
 	height = 0;
+
+	set_size_matrix(&matrix, file_name, &width, &height);
+	fill_matrix_parent(matrix, file_name, width, height);
+	// display_matrix(matrix, width, height);
+	ft_free_matrix((void **)matrix, height, &free_mx_data);
+	// -------------------------------
+	//test
 	fdf.mlx_ptr = mlx_init();
 	if (!fdf.mlx_ptr)
 			ft_fmxe((void **)matrix, height, &free_mx_data, "Error. fdf\n");
-	set_size_matrix(&matrix, file_name, &width, &height);
-	fill_matrix_parent(matrix, file_name, width, height);
-	display_matrix(matrix, width, height);
-	ft_free_matrix((void **)matrix, height, &free_mx_data);
-	//test
-	fdf.mlx_ptr = mlx_init();
 	fdf.win_ptr = mlx_new_window(fdf.mlx_ptr, WIDTH, HEIGHT, "fdf");
-	draw_line(&fdf);
+	img.img = mlx_new_image(fdf.mlx_ptr, WIDTH, HEIGHT);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+	my_mlx_pixel_put(img.img, 5, 5, 0x00FF0000);
+	mlx_put_image_to_window(fdf.mlx_ptr, fdf.win_ptr, img.img, 0, 0);
+	//
+	//
+	// draw_line(&fdf);
 	mlx_loop(fdf.mlx_ptr);
+	// --------------------------------
 	// free(fdf->mlx_ptr);
 }
