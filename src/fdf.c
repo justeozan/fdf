@@ -12,12 +12,6 @@
 
 #include "../include/fdf.h"
 
-
-
-
-
-
-
 void	draw_line(t_fdf *fdf)
 {
 	int	x;
