@@ -55,23 +55,16 @@ void	display_matrix(t_matrix **matrix, int w, int h);
 int		get_width(char *line);
 int		get_height(char *file_name);
 /*-------------fdf-------------*/
-// void	fill_matrix(t_fdf ***matrix, char **map);
-void	fill_matrix(t_matrix ***matrix, char *file_name, int w, int h);
-void	set_size_matrix(t_matrix ***matrix, char *file_name, int *width, int *height);
-void	fdf(char *file);
-// void	fdf(char *file_name);
+void	fdf(char *file_name);
 /*-------------free_fdf-------------*/
 void	free_mx_data(void *ptr);
-// void	free_fdf_data(void *ptr);
-// void	free2d_exit(t_fdf ***matrix, int height);
+/*-------------get_map-------------*/
+char	**line_parser(char *line);
+void	fill_matrix_children(t_matrix **matrix, char **line2d, int w, int y);
+void	fill_matrix_parent(t_matrix **matrix, char *f_name, int w, int h);
+void	set_size_matrix(t_matrix ***matrix, char *file_name, int *w, int *h);
+t_matrix	**get_map(char *file_name);
 /*-------------main-------------*/
 // Not needed
-
-/*-------------amandine-------------*/
-// t_matrix	**set_size_matrix(char *file_name, int *width, int *height);
-// void	free_matrix(t_matrix **matrix, int height);
-// void	ft_exit(char *msg, t_matrix **matrix, int height);
-
-
 
 #endif

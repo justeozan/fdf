@@ -19,6 +19,7 @@ SRC		=	\
 			src/fdf_utils.c\
 			src/fdf.c\
 			src/free_fdf.c\
+			src/get_map.c\
 			src/main.c
 
 OBJDIR		=	obj
