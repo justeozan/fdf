@@ -24,6 +24,8 @@
 
 typedef struct s_matrix
 {
+	int		width;
+	int		height;
 	int		x;
 	int		y;
 	int		z;
@@ -40,8 +42,8 @@ typedef struct s_img
 
 typedef struct s_fdf
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
+	void	*mlx;
+	void	*win;
 	int		x;
 	int		y;
 	int		z;
