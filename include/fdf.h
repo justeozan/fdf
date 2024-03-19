@@ -1,116 +1,98 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 19:17:47 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/19 18:54:53 by kali             ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef FDF_H
-# define FDF_H
+#define FDF_H
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <math.h>
-# include "../libft/libft.h"
-# include "../mlx_linux/mlx.h"
+#include "../mlx_linux/mlx.h"
+#include "../mlx_linux/mlx_int.h"
+#include "../libft/libft.h"
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
 
-# define WIDTH 1920
-# define HEIGHT 1080
-# define FDF matrix[0][0]
+# define DATA matrix[0][0]
 
-# ifndef SCALE_FACTOR
-#  define SCALE_FACTOR 0.85
-# endif
-
-typedef struct s_img
+enum
 {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_len;
-	int		endian;
-	int		x_diff;
-	int		y_diff;
-	int		x_step;
-	int		y_step;
-	int		decision;
-}	t_img;
+	UP = 65362,
+	DOWN = 65364,
+	LEFT = 65361,
+	RIGHT = 65363,
+	SPACE = 32,
+	MINUS = 65453,
+	PLUS = 65451,
+	STAR = 65450,
+	DIV = 65455,
+	ESC = 65307,
+	UP_Z = 65365,
+	DOWN_Z = 65366,
+	ONE = 65436,
+	TWO = 65433,
+	THREE = 65435,
+	FOUR = 65430,
+	FIVE = 65437,
+	SIX = 65432
 
-typedef struct s_matrix
+};
+
+enum
 {
-	int		x;
-	int		y;
-	int		z;
-	int		color;
-	int		is_last;
-	int		is_isometric;
-	int		height;
-	int		width;
-	int		x_proj;
-	int		y_proj;
-	int		z_temp;
-	int		valid;
-	double	rot_x;
-	double	rot_y;
-	double	rot_z;
-	double	depth;
-	double	scale;
-	int		offset_x;
-	int		offset_y;
-	void	*mlx;
-	void	*win;
-	t_img	img;
-}	t_matrix;
+	READ_E = -1,
+	MALLOC_E = -2,
+	DIMENSIONS_E = -3
+};
 
-// typedef struct s_fdf
-// {
-// 	void	*mlx;
-// 	void	*win;
-// 	int		x;
-// 	int		y;
-// 	int		z;
-// }	t_fdf;
+typedef struct s_fdf
+{
+	float		x;
+	float		y;
+	float		z;
+	int			is_last;
+	int			width_map;
+	int			height_map;
+	int			color;
+	int			scale;
+	int			z_scale;
+	int			shift_x;
+	int			shift_y;
+	int			is_isometric;
+	double		angle;
+	int			win_x;
+	int			win_y;
+	void		*mlx_ptr;
+	void		*win_ptr;
+}				t_fdf;
 
-/*-------------displays-------------*/
-void	display_matrix(t_matrix **matrix, int w, int h);
-/*-------------draw_line-------------*/
-void	set_param(t_matrix *a, t_matrix *b, t_matrix *data);
-void	bresenham(t_matrix a, t_matrix b, t_matrix *data);
-void	draw_line_h(t_img img, t_matrix m0, t_matrix m1);
-void	draw_line_g(t_matrix **matrix);
-/*-------------fdf-------------*/
-void	define_offset(t_matrix **matrix, double scale);
-void	define_scale(t_matrix **matrix);
-void	init_proj(t_matrix **matrix);
-t_img	init_new_image(t_matrix	**matrix);
-void	init_fdf(char *file_name, t_matrix **matrix);
-/*-------------free_fdf-------------*/
-void	free_mx_data(void *ptr);
-/*-------------get_map-------------*/
-char	**line_parser(char *line);
-void	fill_matrix_children(t_matrix **matrix, char **line2d, int w, int y);
-void	fill_matrix_parent(t_matrix **matrix, char *f_name, int w, int h);
-void	set_size_matrix(t_matrix ***matrix, char *file_name, int *w, int *h);
-t_matrix	**get_map(char *file_name);
-/*-------------main-------------*/
-void	check_args(int ac, char **av);
-int		close_hook(t_matrix **matrix);
-void	apply_scaling(t_matrix **matrix);
-void	apply_offset(t_matrix **matrix);
-void	init_proj_map(t_matrix **matrix);
-void	transform_img(t_matrix **matrix);
-int		frame(t_matrix **matrix);
-int		main(int ac, char **av);
-/*-------------map_utils-------------*/
-void	ft_display_tab2d(char **strs);
-int		get_width(char *line);
-int		get_height(char *file_name);
+/**Error**/
+void	ft_error(char	*msg);
+void	error_handler(int error, t_fdf **matrix, int y);
+void	free_matrix(t_fdf **matrix, int y);
+
+/**Init_matrix**/
+t_fdf	**init_matrix(char *filename);
+
+/**Matrix_utils**/
+int		words_counter(char const *str, char c);
+int	get_height(char *filename);
+int	get_width(char *filename);
+
+/**Draw_map**/
+void	draw_handler(t_fdf **matrix);
+void	print_menu(t_fdf data);
+
+/**Draw_utils**/
+float	find_absolute(float a);
+float	find_max(float a, float b);
+void	set_param(t_fdf *a, t_fdf *b, t_fdf *data);
+void	zoom(t_fdf *a, t_fdf *b, t_fdf *data);
+void	isometric(t_fdf *dot, double angle);
+
+/**Key_manager**/
+int		key_handler(int key, t_fdf **matrix);
+
+/**Window_manager**/
+void	new_window(int key, t_fdf **matrix);
 
 
+int	on_destroy(t_fdf **matrix);
 #endif

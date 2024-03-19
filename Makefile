@@ -1,78 +1,46 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: kali <kali@student.42.fr>                  +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/13 19:03:54 by ozasahin          #+#    #+#              #
-#    Updated: 2024/03/19 18:38:48 by kali             ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME = FDF
 
-.DEFAULT_GOAL: all
+MLX_FLAGS = -L minilibx-linux -lmlx_Linux -lmlx -lXext -lX11
 
-NAME	=	fdf
+CC = gcc
 
-SRC		=	\
-			src/displays.c\
-			src/draw_line.c\
-			src/fdf.c\
-			src/free_fdf.c\
-			src/get_map.c\
-			src/main.c\
-			src/map_utils.c
+CFLAGS = -Werror -Wall -Wextra
 
-OBJDIR		=	obj
-OBJ			=	$(patsubst src/%.c, obj/%.o, $(SRC))
+RM = rm -rf
 
-# Controls
-CC			=	gcc -g
-CFLAGS		=	-Wall -Wextra -Werror
-INCLUDES	=	-Iinclude -Ilibft -Imlx_linux
-LINKS		=	-Llibft -lft -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
-RM			=	rm -f
+SRCS =  srcs/main.c \
+		srcs/error.c \
+		srcs/init_matrix.c \
+		srcs/matrix_utils.c \
+		srcs/draw_map.c \
+		srcs/key_manager.c \
+		srcs/window_manager.c \
+		srcs/draw_utils.c \
 
-# Colors
-COLOR_RESET			=	\033[0m
-COLOR_RED			=	\033[0;31m
-COLOR_GREEN			=	\033[0;32m
-COLOR_PURPLE		=	\033[0;95m
-COLOR_BLUE			=	\033[0;34m
+OBJS    = ${SRCS:.c=.o}
 
-# Colored Messages
-MESSAGE_COMPILE		=	$(COLOR_BLUE)Compiling the program...$(COLOR_RESET)
-MESSAGE_DONE		=	$(COLOR_GREEN)Compilation completed.$(COLOR_RESET)
-MESSAGE_CLEAN		=	$(COLOR_PURPLE)Cleaning up...$(COLOR_RESET)
-MESSAGE_CLEAN_DONE	=	$(COLOR_PURPLE)Cleanup completed.$(COLOR_RESET)
+LIBFT   = make all -C libft/
 
-all:		force $(NAME)
+all : $(NAME)
 
-$(NAME):	$(OBJ) libft/libft.a
-		@$(CC) $(CFLAGS) $(INCLUDES) $(OBJ) $(LINKS) -o $(NAME)
-		@echo "$(MESSAGE_DONE)"
+%.o: %.c  include/fdf.h libft/libft.h
+	@${CC} ${CFLAGS} -g3 -Iinclude -Ilibft/ -c $< -o $@
 
-obj/%.o:	src/%.c include/fdf.h libft/libft.h mlx_linux/mlx.h Makefile | $(OBJDIR)
-		@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+${NAME}: ${OBJS}
+	${CC} ${CFLAGS} -g3 -Iinclude -Ilibft/  -o $@ $^ $(MLX_FLAGS) libft/libft.a -lm
 
-$(OBJDIR):
-		@mkdir -p $(OBJDIR)
 
-clean:
-		@$(RM) -r $(OBJDIR)
-		@make clean -C libft -s
-		@make clean -C mlx_linux -s
-		@echo "$(MESSAGE_CLEAN_DONE)"
+fclean : clean
+		$(RM) $(NAME)
+		@make -s fclean -C libft/
 
-fclean:		clean
-		@$(RM) $(NAME)
-		@make fclean -C libft -s
-		@make clean -C mlx_linux -s
+clean :
+		$(RM) $(OBJS)
 
-force:
-		@make -C libft -s
-		@make -C mlx_linux -s
+re : fclean all
 
-re:		fclean all
+libft:
+		@make -s all -C libft/
 
-.PHONY:	all clean fclean force re
+.PHONY: all clean fclean re libft
+

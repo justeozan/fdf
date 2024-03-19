@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_octet.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 14:23:41 by justo             #+#    #+#             */
-/*   Updated: 2024/02/21 17:52:23 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/19 19:19:04 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,10 @@ int	update_gnl(char *newbuffer, char *buffer, char **line)
 	return (1);
 }
 
-char	*run_read(int fd, char *line, char *buffer)
+int	run_read(int fd, char *line, char *buffer)
 {
-	int	byte_read;
+	int		byte_read;
+	size_t	line_len;
 
 	byte_read = 1;
 	while (byte_read > 0)
@@ -78,33 +79,34 @@ char	*run_read(int fd, char *line, char *buffer)
 		buffer[byte_read] = 0;
 		line = extract_the_line(line, buffer, ft_strlen_gnl(buffer));
 		if (!line)
-			return (NULL);
-		if ((there_is_a_line(line) > 0 || byte_read == 0) && line[0] != 0)
-			return (line);
+			return (-2);
+		line_len = ther_is_a_line(line);
+		if ((line_len > 0 || byte_read == 0) && line[0] != 0)
+			return (line_len);
 	}
 	buffer[0] = '\0';
 	free(line);
-	return (NULL);
+	return (0);
 }
 
-char	*get_next_line_octet(int fd, int *octet)
+char	*get_next_line_octet(int fd, char **line)
 {
 	static t_id	buffer_memory[MAX_ID];
-	char		*line;
+	//char		*line;
 	char		*buffer;
 
 	if (fd < 0 || MAX_ID < 1 || BUFFER_SIZE < 1)
 		return (NULL);
-	line = NULL;
-	line = str_init(line);
+	//line = NULL;
+	*line = str_init(*line);
 	if (!line)
 		return (NULL);
 	buffer = buffer_init(fd, buffer_memory);
 	if (!buffer)
 		return (NULL);
-	if (update_gnl(buffer, &buffer[there_is_a_line(buffer)], &line) < 0)
+	if (update_gnl(buffer, &buffer[there_is_a_line(buffer)], line) < 0)
 		return (free(line), NULL);
-	if (there_is_a_line(line) > 0)
+	if (there_is_a_line(*line) > 0)
 		return (line);
 	octet = ft_strlen(run_read(fd, line, buffer));
 	return (run_read(fd, line, buffer));

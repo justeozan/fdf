@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:21:30 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/02/26 14:21:03 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/19 19:19:57 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ typedef struct s_id
 	char	buffer[BUFFER_SIZE + 1];
 }	t_id;
 
-char	*get_next_line_octet(int fd, int *octet);
+char	*get_next_line_octet(int fd, char **line);
 char	*extract_the_line(char *line, char *buffer, int len);
 size_t	there_is_a_line(char *str);
 int		update_gnl(char *newbuffer, char *buffer, char **line);
-char	*run_read(int fd, char *line, char *buffer);
+int		run_read(int fd, char *line, char *buffer);
 char	*get_next_line(int fd);
 size_t	ft_strlen_gnl(char *str);
 char	*str_init(char *s);
@@ -103,6 +103,7 @@ int		ft_printf(const char *entry, ...);
 /*-------------str-------------*/
 char	**ft_split(char *s, char c); //const
 char	*ft_strchr(const char *s, int c);
+int		ft_strcmp(char *s1, char *s2);
 char	*ft_strdup(const char *str);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 char	*ft_strjoin(char const *s1, char const *s2);
