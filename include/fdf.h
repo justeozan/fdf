@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:17:47 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/19 15:54:07 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:12:42 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		line_len;
 	int		endian;
+	int		x_diff;
+	int		y_diff;
+	int		x_step;
+	int		y_step;
+	int		decision;
 }	t_img;
 
 typedef struct s_matrix

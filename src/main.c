@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:07:35 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/19 16:16:09 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:03:04 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,30 @@ void	init_proj_map(t_matrix **matrix)
 	}
 }
 
-
 void	transform_img(t_matrix **matrix)
 {
+	size_t	x;
+	size_t	y;
 
+	y = 0;
+	while (matrix[y])
+	{
+		x = 0;
+		while (matrix[y][x].valid)
+		{
+			if (matrix[y][x + 1].valid)
+				draw_line(FDF.img, matrix[y][x], matrix[y][x + 1]);
+			if (matrix[y + 1])
+			{
+				if (matrix[y + 1][x].valid)
+					draw_line(FDF.img, matrix[y][x], matrix[y + 1][x]);
+				// if (matrix[y + 1][x + 1].valid) //diagnoale
+				// 	draw_line(FDF.img, matrix[y][x], matrix[y + 1][x + 1]);
+			}
+			x++;
+		}
+		y++;
+	}
 }
 
 int	frame(t_matrix **matrix)
