@@ -35,8 +35,10 @@ void	fill_matrix_children(t_matrix **matrix, char **line2d, int w, int y)
 		matrix[y][x].x = x;
 		matrix[y][x].y = y;
 		matrix[y][x].z = ft_atoi(line2d[x]);
+		matrix[y][x].is_last = 0;
 	}
 	ft_free2d(line2d);
+	matrix[y][--x].is_last = 1;
 }
 
 void	fill_matrix_parent(t_matrix **matrix, char *f_name, int w, int h)

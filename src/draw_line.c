@@ -12,9 +12,29 @@
 
 #include "../include/fdf.h"
 
+void	bresenham(t_matrix a, t_matrix b, t_matrix *data)
+{
+	float	step_x;
+	float	step_y;
+	float	max;
 
+	set_param(&a, &b, data);
+	step_x = b.x - a.x;
+	step_y = b.y - a.y;
+	max = find_max(find_absolute(step_x), find_absolute(step_y));
+	step_x /= max;
+	step_y /= max;
+	while ((int)(a.x - b.x) || (int)(a.y - b.y))
+	{
+		mlx_pixel_put(data->mlx, data->win, a.x, a.y, 250);
+		a.x += step_x;
+		a.y += step_y;
+		if (a.x > data->width || a.y > data->height || a.y < 0 || a.x < 0)
+			break;
+	}
+}
 
-void	draw_line(t_img img, t_matrix m0, t_matrix m1)
+void	draw_line_h(t_img img, t_matrix m0, t_matrix m1)
 {
 	img.x_step = 1;
 	img.y_step = 1;
@@ -29,4 +49,29 @@ void	draw_line(t_img img, t_matrix m0, t_matrix m1)
 	{
 		img.decision = 2 * img.y_diff - img.x_diff;
 	}
+}
+
+void	draw_line_g(t_matrix **matrix)
+{
+	int	y;
+	int	x;
+
+	// print_menu(FDF);
+	y = 0;
+	while (matrix[y] != NULL)
+	{
+		x = 0;
+		while (1)
+		{
+			if (matrix[y + 1])
+				bresenham(matrix[y][x], matrix[y + 1][x], &FDF);
+			if (!matrix[y][x].is_last) //is_last = valid
+				bresenham(matrix[y][x], matrix[y][x + 1], &FDF);
+			if (matrix[y][x].is_last) //is last = valid
+				break;
+			x++;
+		}
+		y++;
+	}
+
 }

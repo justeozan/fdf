@@ -12,28 +12,6 @@
 
 #include "../include/fdf.h"
 
-// void	draw_line(t_fdf *fdf)
-// {
-// 	int	x;
-// 	int	y;
-
-// 	x = 100;
-// 	y = 100;
-// 	while (x < 200)
-// 	{
-// 		mlx_pixel_put(fdf->mlx, fdf->win, x, y, 0xFFFFFF);
-// 		x++;
-// 	}
-// }
-
-// void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
-// {
-// 	char	*dst;
-
-// 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel/8));
-// 	*(unsigned int *)dst = color;
-// }
-
 void	define_offset(t_matrix **matrix, double scale)
 {
 	FDF.offset_x = (FDF.width / 2) * scale

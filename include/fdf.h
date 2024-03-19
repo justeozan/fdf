@@ -48,6 +48,7 @@ typedef struct s_matrix
 	int		y;
 	int		z;
 	int		color;
+	int		is_last;
 	int		height;
 	int		width;
 	int		x_proj;
