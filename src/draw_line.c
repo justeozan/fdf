@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 22:10:59 by marvin            #+#    #+#             */
-/*   Updated: 2024/03/19 17:13:55 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:46:49 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
+
+void	set_param(t_matrix *a, t_matrix *b, t_matrix *data)
+{
+	zoom(a, b, data);
+	if (data->is_isometric)
+	{
+		isometric(a, data->angle);
+		isometric(b, data->angle);
+	}
+	a->x += data->shift_x;
+	a->y += data->shift_y;
+	b->x += data->shift_x;
+	b->y += data->shift_y;
+}
 
 void	bresenham(t_matrix a, t_matrix b, t_matrix *data)
 {

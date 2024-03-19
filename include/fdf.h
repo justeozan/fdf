@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:17:47 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/19 17:12:42 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:54:53 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_matrix
 	int		z;
 	int		color;
 	int		is_last;
+	int		is_isometric;
 	int		height;
 	int		width;
 	int		x_proj;
@@ -78,11 +79,17 @@ typedef struct s_matrix
 
 /*-------------displays-------------*/
 void	display_matrix(t_matrix **matrix, int w, int h);
-/*-------------fdf_utils-------------*/
-int		get_width(char *line);
-int		get_height(char *file_name);
+/*-------------draw_line-------------*/
+void	set_param(t_matrix *a, t_matrix *b, t_matrix *data);
+void	bresenham(t_matrix a, t_matrix b, t_matrix *data);
+void	draw_line_h(t_img img, t_matrix m0, t_matrix m1);
+void	draw_line_g(t_matrix **matrix);
 /*-------------fdf-------------*/
-void	fdf(char *file_name);
+void	define_offset(t_matrix **matrix, double scale);
+void	define_scale(t_matrix **matrix);
+void	init_proj(t_matrix **matrix);
+t_img	init_new_image(t_matrix	**matrix);
+void	init_fdf(char *file_name, t_matrix **matrix);
 /*-------------free_fdf-------------*/
 void	free_mx_data(void *ptr);
 /*-------------get_map-------------*/
@@ -92,6 +99,18 @@ void	fill_matrix_parent(t_matrix **matrix, char *f_name, int w, int h);
 void	set_size_matrix(t_matrix ***matrix, char *file_name, int *w, int *h);
 t_matrix	**get_map(char *file_name);
 /*-------------main-------------*/
-// Not needed
+void	check_args(int ac, char **av);
+int		close_hook(t_matrix **matrix);
+void	apply_scaling(t_matrix **matrix);
+void	apply_offset(t_matrix **matrix);
+void	init_proj_map(t_matrix **matrix);
+void	transform_img(t_matrix **matrix);
+int		frame(t_matrix **matrix);
+int		main(int ac, char **av);
+/*-------------map_utils-------------*/
+void	ft_display_tab2d(char **strs);
+int		get_width(char *line);
+int		get_height(char *file_name);
+
 
 #endif

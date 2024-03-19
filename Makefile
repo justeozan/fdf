@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+         #
+#    By: kali <kali@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/13 19:03:54 by ozasahin          #+#    #+#              #
-#    Updated: 2024/03/19 13:10:26 by ozasahin         ###   ########.fr        #
+#    Updated: 2024/03/19 18:38:48 by kali             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,12 @@ NAME	=	fdf
 
 SRC		=	\
 			src/displays.c\
-			src/fdf_utils.c\
+			src/draw_line.c\
 			src/fdf.c\
 			src/free_fdf.c\
 			src/get_map.c\
-			src/main.c
+			src/main.c\
+			src/map_utils.c
 
 OBJDIR		=	obj
 OBJ			=	$(patsubst src/%.c, obj/%.o, $(SRC))
