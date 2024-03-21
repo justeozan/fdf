@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:23:20 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/19 15:45:12 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/21 17:10:10 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,27 +33,27 @@ void	define_scale(t_matrix **matrix)
 		FDF.scale = scale_y;
 }
 
-void	init_proj(t_matrix **matrix)
-{
-	define_scale(matrix);
-	define_offset(matrix, FDF.scale);
-	FDF.rot_x = -0.52;
-	FDF.rot_y = 0.52;
-	FDF.rot_z = 0;
-	FDF.depth = 1;
-}
+// void	init_proj(t_matrix **matrix)
+// {
+// 	define_scale(matrix);
+// 	define_offset(matrix, FDF.scale);
+// 	FDF.rot_x = -0.52;
+// 	FDF.rot_y = 0.52;
+// 	FDF.rot_z = 0;
+// 	FDF.depth = 1;
+// }
 
-t_img	init_new_image(t_matrix	**matrix)
+t_img	*init_new_image(t_matrix	**matrix)
 {
-	t_img	img;
+	t_img	*img;
 
 	ft_bzero(&img, sizeof(t_img));
-	img.img = mlx_new_image(FDF.mlx, WIDTH, HEIGHT);
-	if (!img.img)
+	img->img = mlx_new_image(FDF.mlx, WIDTH, HEIGHT);
+	if (!img->img)
 		ft_print_err("Error, init_new_image");
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
-		&img.line_len, &img.endian);
-	if (!img.addr)
+	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
+		&img->line_len, &img->endian);
+	if (!img->addr)
 		ft_print_err("Error, init_new_image");
 	return (img);
 }
@@ -69,9 +69,9 @@ void	init_fdf(char *file_name, t_matrix **matrix)
 	FDF.win = mlx_new_window(FDF.mlx, WIDTH, HEIGHT, "fdf");
 	//if error
 	FDF.img = init_new_image(matrix);
-	if (mlx_put_image_to_window(FDF.mlx, FDF.win, FDF.img.img, 0, 0) < 0)
+	if (mlx_put_image_to_window(FDF.mlx, FDF.win, FDF.img->img, 0, 0) < 0)
 		ft_fmxe((void **)matrix, (**matrix).height, &free_mx_data, "Error. fdf\n");
-	init_proj(matrix);
+	// init_proj(matrix);
 		
 	
 	// my_mlx_pixel_put(img.img, 5, 5, 0x00FF0000);

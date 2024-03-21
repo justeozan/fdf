@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:17:47 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/19 18:54:53 by kali             ###   ########.fr       */
+/*   Updated: 2024/03/21 17:09:35 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,40 +42,55 @@ typedef struct s_img
 	int		decision;
 }	t_img;
 
+// typedef struct s_matrix
+// {
+// 	int		x;
+// 	int		y;
+// 	int		z;
+// 	int		color;
+// 	int		is_isometric;
+// 	int		height;
+// 	int		width;
+// 	int		x_proj;
+// 	int		y_proj;
+// 	int		z_proj;
+// 	int		valid;
+// 	double	rot_x;
+// 	double	rot_y;
+// 	double	rot_z;
+// 	double	depth;
+// 	double	scale;
+// 	int		offset_x;
+// 	int		offset_y;
+// 	void	*mlx;
+// 	void	*win;
+// 	t_img	img;
+// 	// t_img	*img;
+// }	t_matrix;
+
 typedef struct s_matrix
 {
 	int		x;
 	int		y;
 	int		z;
 	int		color;
-	int		is_last;
+	int		x_proj;
+	int		y_proj;
+	int		z_proj;
+	int		valid;
 	int		is_isometric;
 	int		height;
 	int		width;
-	int		x_proj;
-	int		y_proj;
-	int		z_temp;
-	int		valid;
-	double	rot_x;
-	double	rot_y;
-	double	rot_z;
-	double	depth;
 	double	scale;
+	double	angle;
+	double	depth;
 	int		offset_x;
 	int		offset_y;
 	void	*mlx;
 	void	*win;
-	t_img	img;
+	t_img	*img;
 }	t_matrix;
 
-// typedef struct s_fdf
-// {
-// 	void	*mlx;
-// 	void	*win;
-// 	int		x;
-// 	int		y;
-// 	int		z;
-// }	t_fdf;
 
 /*-------------displays-------------*/
 void	display_matrix(t_matrix **matrix, int w, int h);
@@ -88,7 +103,7 @@ void	draw_line_g(t_matrix **matrix);
 void	define_offset(t_matrix **matrix, double scale);
 void	define_scale(t_matrix **matrix);
 void	init_proj(t_matrix **matrix);
-t_img	init_new_image(t_matrix	**matrix);
+t_img	*init_new_image(t_matrix	**matrix);
 void	init_fdf(char *file_name, t_matrix **matrix);
 /*-------------free_fdf-------------*/
 void	free_mx_data(void *ptr);
@@ -96,13 +111,13 @@ void	free_mx_data(void *ptr);
 char	**line_parser(char *line);
 void	fill_matrix_children(t_matrix **matrix, char **line2d, int w, int y);
 void	fill_matrix_parent(t_matrix **matrix, char *f_name, int w, int h);
-void	set_size_matrix(t_matrix ***matrix, char *file_name, int *w, int *h);
+void	set_size_matrix(t_matrix ***matrix, char *file_name, int w, int h);
 t_matrix	**get_map(char *file_name);
 /*-------------main-------------*/
 void	check_args(int ac, char **av);
 int		close_hook(t_matrix **matrix);
-void	apply_scaling(t_matrix **matrix);
-void	apply_offset(t_matrix **matrix);
+void	apply_scaling(t_matrix *item, t_matrix **matrix);
+void	apply_offset(t_matrix *item, t_matrix **matrix);
 void	init_proj_map(t_matrix **matrix);
 void	transform_img(t_matrix **matrix);
 int		frame(t_matrix **matrix);
