@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:23:20 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/21 17:10:10 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:08:00 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,39 +43,36 @@ void	define_scale(t_matrix **matrix)
 // 	FDF.depth = 1;
 // }
 
-t_img	*init_new_image(t_matrix	**matrix)
+t_img	init_new_image(t_matrix	**matrix)
 {
-	t_img	*img;
+	t_img	img;
 
 	ft_bzero(&img, sizeof(t_img));
-	img->img = mlx_new_image(FDF.mlx, WIDTH, HEIGHT);
-	if (!img->img)
-		ft_print_err("Error, init_new_image");
-	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
-		&img->line_len, &img->endian);
-	if (!img->addr)
-		ft_print_err("Error, init_new_image");
+	// ft_printf("Tout est ok\n");
+	img.img = mlx_new_image(FDF.mlx, WIDTH, HEIGHT);
+	if (!img.img)
+		exit_err("Error, init_new_image");
+	
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
+		&img.line_len, &img.endian);
+	if (!img.addr)
+		exit_err("Error, init_new_image");
 	return (img);
 }
 
-void	init_fdf(char *file_name, t_matrix **matrix)
+t_matrix	**init_fdf(char *file_name, t_matrix **matrix)
 {
-	matrix = get_map(file_name);
-	display_matrix(matrix, (**matrix).width, (**matrix).height);
-	ft_free_matrix((void **)matrix, (**matrix).height, &free_mx_data);
+	matrix = get_map(file_name, matrix);
+	display_matrix(matrix, FDF.width, FDF.height);
 	FDF.mlx = mlx_init();
 	if (!FDF.mlx)
-		ft_fmxe((void **)matrix, (**matrix).height, &free_mx_data, "Error. fdf\n");
+		close_program(matrix, "Error\n");
 	FDF.win = mlx_new_window(FDF.mlx, WIDTH, HEIGHT, "fdf");
-	//if error
-	FDF.img = init_new_image(matrix);
-	if (mlx_put_image_to_window(FDF.mlx, FDF.win, FDF.img->img, 0, 0) < 0)
-		ft_fmxe((void **)matrix, (**matrix).height, &free_mx_data, "Error. fdf\n");
+	if (!FDF.win)
+		close_program(matrix, "Error\n");
+	FDF.imgs = init_new_image(matrix);
+	if (mlx_put_image_to_window(FDF.mlx, FDF.win, FDF.imgs.img, 0, 0) < 0)
+		close_program(matrix, "Error\n");
+	return (matrix);
 	// init_proj(matrix);
-		
-	
-	// my_mlx_pixel_put(img.img, 5, 5, 0x00FF0000);
-	// draw_line(&fdf);
-	mlx_loop(FDF.mlx);
-	// free(fdf->mlx);
 }

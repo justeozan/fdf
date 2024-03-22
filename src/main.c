@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:07:35 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/21 17:14:05 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:08:52 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,14 @@ void	check_args(int ac, char **av)
 	if (ac == 2)
 	{
 		if (!ft_strnstr(av[1], ".fdf", ft_strlen(av[1])))
-			ft_print_err("Error! \".fdf\" is needed\n");
+			exit_err("Error! \".fdf\" is needed\n");
 		fd = open(av[1], O_RDONLY);
 		if (fd <= 0)
-			ft_print_err("Error! bad fd or file empty\n");
+			exit_err("Error! bad fd or file empty\n");
 	}
 	else
 		ft_printf("Notice : ./fdf <maps.fdf>\n");
 	close(fd);
-}
-
-int	close_hook(t_matrix **matrix)
-{
-	// close_program(matrix, NULL);
-	// ft_fmxe((void **)matrix, FDF.height, ft_free_matrix, "Shutdown");
-	free(FDF.mlx);
-	return (0);
 }
 
 void	apply_scaling(t_matrix *item, t_matrix **matrix)
@@ -103,20 +95,23 @@ int	frame(t_matrix **matrix)
 {
 	init_proj_map(matrix);
 	transform_img(matrix);
-	mlx_put_image_to_window(FDF.mlx, FDF.win, FDF.img->img, 0, 0);
+	mlx_put_image_to_window(FDF.mlx, FDF.win, FDF.imgs.img, 0, 0);
 	return (1);
 }
 
 int	main(int ac, char **av)
 {
 	t_matrix	**matrix;
+	int			i;
 
+	i = 0;
 	matrix = NULL;
 	check_args(ac, av);
-	init_fdf(av[1], matrix);
-	mlx_hook(FDF.win, 17, 0, close_hook, matrix);
-	// mlx_hook(FDF.win, 2, 1L << 0, manage_keyhook, matrix);
-	mlx_loop_hook(FDF.mlx, frame, matrix);
+	matrix = init_fdf(av[1], matrix);
+	i = mlx_hook(FDF.win, 17, 0, close_normal, matrix); //equivqlent a mlx_expose_hook
+	// mlx_hook(FDF.win, 2, 1L << 0, manage_keyhook, matrix);//mlx_key_hook
+	// mlx_loop_hook(FDF.mlx, frame, matrix);
+	ft_printf("ok i = %d\n", i);
 	mlx_loop(FDF.mlx);
-	return (0);
+	return (close_program(matrix, NULL));
 }

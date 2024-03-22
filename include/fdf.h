@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:17:47 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/21 17:09:35 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:57:07 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,32 +42,6 @@ typedef struct s_img
 	int		decision;
 }	t_img;
 
-// typedef struct s_matrix
-// {
-// 	int		x;
-// 	int		y;
-// 	int		z;
-// 	int		color;
-// 	int		is_isometric;
-// 	int		height;
-// 	int		width;
-// 	int		x_proj;
-// 	int		y_proj;
-// 	int		z_proj;
-// 	int		valid;
-// 	double	rot_x;
-// 	double	rot_y;
-// 	double	rot_z;
-// 	double	depth;
-// 	double	scale;
-// 	int		offset_x;
-// 	int		offset_y;
-// 	void	*mlx;
-// 	void	*win;
-// 	t_img	img;
-// 	// t_img	*img;
-// }	t_matrix;
-
 typedef struct s_matrix
 {
 	int		x;
@@ -88,7 +62,7 @@ typedef struct s_matrix
 	int		offset_y;
 	void	*mlx;
 	void	*win;
-	t_img	*img;
+	t_img	imgs;
 }	t_matrix;
 
 
@@ -103,16 +77,18 @@ void	draw_line_g(t_matrix **matrix);
 void	define_offset(t_matrix **matrix, double scale);
 void	define_scale(t_matrix **matrix);
 void	init_proj(t_matrix **matrix);
-t_img	*init_new_image(t_matrix	**matrix);
-void	init_fdf(char *file_name, t_matrix **matrix);
+t_img	init_new_image(t_matrix	**matrix);
+t_matrix	**init_fdf(char *file_name, t_matrix **matrix);
 /*-------------free_fdf-------------*/
+int		close_program(t_matrix **matrix, char *txt_err);
+int		close_normal(t_matrix **matrix);
 void	free_mx_data(void *ptr);
 /*-------------get_map-------------*/
 char	**line_parser(char *line);
 void	fill_matrix_children(t_matrix **matrix, char **line2d, int w, int y);
-void	fill_matrix_parent(t_matrix **matrix, char *f_name, int w, int h);
+void	fill_matrix_parent(t_matrix **matrix, char *f_name);
 void	set_size_matrix(t_matrix ***matrix, char *file_name, int w, int h);
-t_matrix	**get_map(char *file_name);
+t_matrix	**get_map(char *file_name, t_matrix **matrix);
 /*-------------main-------------*/
 void	check_args(int ac, char **av);
 int		close_hook(t_matrix **matrix);

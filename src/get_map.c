@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 15:13:03 by marvin            #+#    #+#             */
-/*   Updated: 2024/03/21 16:45:57 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:08:43 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char	**line_parser(char *line)
 
 	if (!line)
 		return (NULL);
+
 	splitted_line = ft_split(line, ' ');
 	free (line);
 	return (splitted_line);
@@ -28,8 +29,9 @@ void	fill_matrix_children(t_matrix **matrix, char **line2d, int w, int y)
 	int	x;
 
 	x = -1;
+
 	if (!line2d | !(*line2d))
-		return (ft_fmxe((void **)matrix, y, free_mx_data, "Error\n"));
+		close_program(matrix, "Error\n");
 	while (++x < w)
 	{
 		matrix[y][x].x = x;
@@ -41,17 +43,21 @@ void	fill_matrix_children(t_matrix **matrix, char **line2d, int w, int y)
 	matrix[y][x].valid = 0;
 }
 
-void	fill_matrix_parent(t_matrix **matrix, char *f_name, int w, int h)
+void	fill_matrix_parent(t_matrix **matrix, char *f_name)
 {
 	int	fd;
 	int	y;
 
 	fd = open(f_name, O_RDONLY);
 	if (fd < 1)
-		ft_fmxe((void **)matrix, h, &free_mx_data, "Error\n");
+		close_program(matrix, "Error\n");
 	y = -1;
-	while (++y < h)
-		fill_matrix_children(matrix, line_parser(get_next_line(fd)), w, y);
+	// ft_printf("Tout est ok, y = , height = %d\n", FDF.height);
+
+	while (++y < FDF.height)
+	{
+		fill_matrix_children(matrix, line_parser(get_next_line(fd)), FDF.width, y);
+	}
 }
 
 void	set_size_matrix(t_matrix ***matrix, char *file_name, int w, int h)
@@ -62,33 +68,32 @@ void	set_size_matrix(t_matrix ***matrix, char *file_name, int w, int h)
 	fd = -1;
 	fd = open(file_name, O_RDONLY);
 	if (fd < 1)
-		ft_print_err("Error. f1\n");
+		exit_err("Error. f1\n");
 	w = get_width(get_next_line(fd));
 	close(fd);
 	h = get_height(file_name);
 	if (w < 0 || h < 0)
-		ft_print_err("Error. f1\n");
-	(*matrix) = (t_matrix **)malloc(sizeof(t_matrix *) * (h));
+		exit_err("Error. f1\n");
+	*matrix = (t_matrix **)malloc(sizeof(t_matrix *) * (h));
 	if (!(*matrix))
-		ft_fmxe((void **)matrix, h, &free_mx_data, "Error. f1\n");
-		//close_program
+		close_program(*matrix, "Error\n");
 	i = -1;
 	while (++i < h)
 	{
 		(*matrix)[i] = (t_matrix *)malloc(sizeof(t_matrix) * (w + 1));
-		if (!((*matrix)[i]))
-			ft_fmxe((void **)matrix, h, &free_mx_data, "Error. f1\n");
+		if (!(*matrix)[i])
+			close_program(*matrix, "Error\n");
 	}
+	FDF->width = w;
+	FDF->height = h;
 }
 
-t_matrix	**get_map(char *file_name)
+t_matrix	**get_map(char *file_name, t_matrix **matrix)
 {
-	t_matrix	**matrix;
-
-	matrix = NULL;
-	set_size_matrix(&matrix, file_name, FDF.width, FDF.height);
-	fill_matrix_parent(matrix, file_name, FDF.width, FDF.height);
-	// display_matrix(matrix, width, height);
+	// test = set_size_test(file_name);
+	set_size_matrix(&matrix, file_name, 0, 0);
+	fill_matrix_parent(matrix, file_name);
 	// ft_free_matrix((void **)matrix, FDF.height, &free_mx_data);
 	return (matrix);
+	// return (matrix);
 }

@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:21:30 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/02/26 14:21:03 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:07:43 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 /*-------------err-------------*/
 void	norm_is_not_ok(char **line);
-void	ft_print_err(char *err_txt);
+void	exit_err(char *err_txt);
 /*-------------file-------------*/
 void	ft_putchar_fd(char c, int fd);
 void	ft_putendl_fd(char *s, int fd);

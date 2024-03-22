@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:36:57 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/21 16:45:39 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:07:53 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	display_matrix(t_matrix **matrix, int w, int h)
 	int	x;
 	int	y;
 
-	ft_printf("%d, %d", FDF.width, FDF.height);
+	ft_printf("--\nwidth = %d, heiight = %d\n--\n", FDF.width, FDF.height);
 	if (!matrix || !(*matrix) || w < 0 || h < 0)
-		ft_print_err("Error! display_matrix: matrix is NULL\n");
+		exit_err("Error! display_matrix: matrix is NULL\n");
 	ft_printf(" ");
 	x = -1;
 	while (++x < w)
