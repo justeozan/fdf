@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:17:47 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/23 14:53:33 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/23 14:52:15 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include "../libft/libft.h"
 # include "../mlx_linux/mlx.h"
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 800 //1920
+# define HEIGHT 600 //1080
 # define FDF matrix[0][0]
 
 # ifndef SCALE_FACTOR
@@ -115,12 +115,12 @@ void	set_size_matrix(t_matrix ***matrix, char *file_name, int w, int h);
 t_matrix	**get_map(char *file_name, t_matrix **matrix);
 /*-------------key_manager-------------*/
 int 	is_key(int key);
-void    do_key(int key, t_matrix **matrix);
-int    manage_key(int key, t_matrix **matrix);
+void	do_key(int key, t_matrix **matrix);
+int		manage_key(int key, t_matrix **matrix);
 /*-------------main-------------*/
 void	check_args(int ac, char **av);
 int		close_hook(t_matrix **matrix);
-void	apply_scaling(t_matrix *item, t_matrix **matrix);
+void	apply_scaling(t_matrix point, t_matrix **matrix);
 void	apply_offset(t_matrix *item, t_matrix **matrix);
 void	init_proj_map(t_matrix **matrix);
 void	transform_img(t_matrix **matrix);

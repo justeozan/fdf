@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:07:35 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/23 14:56:39 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/23 14:41:49 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,12 @@ void	check_args(int ac, char **av)
 	close(fd);
 }
 
-void	apply_scaling(t_matrix *item, t_matrix **matrix)
+void	apply_scaling(t_matrix point, t_matrix **matrix)
 {
-	item->x_proj = item->x * ceil(FDF.scale);
-	item->y_proj = item->y * ceil(FDF.scale);
-	item->z_proj = item->z * 0.15 * FDF.scale * FDF.depth;
+	//ft_printf("scale = %d\n", FDF.scale);
+	point.x_proj = point.x * ceil(FDF.scale);
+	point.y_proj = point.y * ceil(FDF.scale);
+	point.z_proj = point.z * 0.15 * FDF.scale * FDF.depth;
 }
 
 void	apply_offset(t_matrix *item, t_matrix **matrix)
@@ -52,10 +53,9 @@ void	init_proj_map(t_matrix **matrix)
 	while (y < FDF.height)
 	{
 		x = 0;
-		while(matrix[y][x].valid > 0 && x < FDF.width) //attention a bien initialiser valid
+		while(matrix[y][x].valid > 0 && x < FDF.width)
 		{
-			// ft_printf("matrix[%d][%d].valid = %d\n", y, x, matrix[y][x].valid);
-			apply_scaling(&matrix[y][x], matrix);
+			apply_scaling(matrix[y][x], matrix);
 			// apply_rotation(matrix);
 			apply_offset(&matrix[y][x], matrix);
 			x++;
@@ -78,17 +78,13 @@ void	transform_img(t_matrix **matrix)
 		x = 0;
 		while (x < FDF.width && matrix[y][x].valid)
 		{
-			// ft_printf("-matrix[%d][%d]\n", y, x);
 			if (x < FDF.width || matrix[y][x + 1].valid)
 			{
-				// ft_printf("draw p to x+1\n");
 				draw_line(FDF.imgs, matrix[y][x], matrix[y][x + 1]);
 			}
-			// ft_printf("test if (y < FDF.height || matrix[y + 1])\n");
 			if (y + 1 < FDF.height)
 			{
-					// ft_printf("draw p to y+1\n");
-					// draw_line(FDF.img, matrix[y][x], matrix[y + 1][x]);
+				draw_line(FDF.imgs, matrix[y][x], matrix[y + 1][x]);
 				// if (matrix[y + 1][x + 1].valid) //diagnoale
 				// 	draw_line(FDF.img, matrix[y][x], matrix[y + 1][x + 1]);
 			}
@@ -114,6 +110,8 @@ int	main(int ac, char **av)
 	matrix = NULL;
 	check_args(ac, av);
 	matrix = init_fdf(av[1], matrix);
+	//ft_printf("scale = %d\n", FDF.scale);
+
 	mlx_hook(FDF.win, 17, 0, close_normal, matrix); //equivqlent a mlx_expose_hook
 	// mlx_hook(FDF.win, 2, 1L << 0, manage_keyhook, matrix);//mlx_key_hook
 	mlx_key_hook(FDF.win, manage_key, matrix);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 22:10:59 by marvin            #+#    #+#             */
-/*   Updated: 2024/03/23 14:55:47 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/23 14:37:09 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	put_pixel(t_img imgs, int x, int y, int color)
 {
 	int	offset;
 
-	ft_printf("x = %d, y = %d\n", x, y);
+	//t_printf("x = %d, y = %d\n", x, y);
 	offset = (imgs.line_len * y) + (imgs.bits_per_pixel * x / 8);
 	if (x >= 0 && x < WIDTH && y > 0 && y < HEIGHT)
 		*((int *)(imgs.addr + offset)) = color;
@@ -81,7 +81,6 @@ void	init_step(t_img *imgs, t_matrix m0, t_matrix m1)
 
 void	draw_line(t_img imgs, t_matrix m0, t_matrix m1)
 {
-	// ft_printf("draw_line\n");
 	init_step(&imgs, m0, m1);
 	if (imgs.x_diff >= imgs.y_diff)
 	{

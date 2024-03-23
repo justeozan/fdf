@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:23:20 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/22 16:08:00 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/23 14:53:26 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,15 @@ void	define_scale(t_matrix **matrix)
 		FDF.scale = scale_y;
 }
 
-// void	init_proj(t_matrix **matrix)
-// {
-// 	define_scale(matrix);
-// 	define_offset(matrix, FDF.scale);
-// 	FDF.rot_x = -0.52;
-// 	FDF.rot_y = 0.52;
-// 	FDF.rot_z = 0;
-// 	FDF.depth = 1;
-// }
+void	init_proj(t_matrix **matrix)
+{
+	define_scale(matrix);
+	define_offset(matrix, FDF.scale);
+	//FDF.rot_x = -0.52;
+	//FDF.rot_y = 0.52;
+	//FDF.rot_z = 0;
+	FDF.depth = 0.50;
+}
 
 t_img	init_new_image(t_matrix	**matrix)
 {
@@ -73,6 +73,6 @@ t_matrix	**init_fdf(char *file_name, t_matrix **matrix)
 	FDF.imgs = init_new_image(matrix);
 	if (mlx_put_image_to_window(FDF.mlx, FDF.win, FDF.imgs.img, 0, 0) < 0)
 		close_program(matrix, "Error\n");
+	init_proj(matrix);
 	return (matrix);
-	// init_proj(matrix);
 }

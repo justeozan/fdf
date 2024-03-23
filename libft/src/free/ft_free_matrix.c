@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_matrix.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:25:31 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/02/26 10:51:13 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/23 14:19:13 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ void	ft_free_matrix_(void **matrix, int height, void (*free_func)(void *))
 void	ft_fmxe(void **matrix, int h, void (*f)(void *), char *err_txt)
 {
 	ft_free_matrix(matrix, h, f);
-	ft_print_err(err_txt);
+	exit_err(err_txt);
 }
 
 // With comments
 void	ft_fmxe_(void **matrix, int h, void (*f)(void *), char *err_txt)
 {
 	ft_free_matrix_(matrix, h, f);
-	ft_print_err(err_txt);
+	exit_err(err_txt);
 }
