@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:17:47 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/23 14:44:53 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/23 14:53:33 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include "../libft/libft.h"
 # include "../mlx_linux/mlx.h"
 
-# define WIDTH 800 //1920
-# define HEIGHT 600 //1080
+# define WIDTH 1920
+# define HEIGHT 1080
 # define FDF matrix[0][0]
 
 # ifndef SCALE_FACTOR

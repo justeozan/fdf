@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 15:13:03 by marvin            #+#    #+#             */
-/*   Updated: 2024/03/22 16:08:43 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/23 14:53:11 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	fill_matrix_children(t_matrix **matrix, char **line2d, int w, int y)
 		matrix[y][x].x = x;
 		matrix[y][x].y = y;
 		matrix[y][x].z = ft_atoi(line2d[x]);
+		matrix[y][x].color = 0xFFFFFF;
 		matrix[y][x].valid = 1;
 	}
 	ft_free2d(line2d);
@@ -53,7 +54,6 @@ void	fill_matrix_parent(t_matrix **matrix, char *f_name)
 		close_program(matrix, "Error\n");
 	y = -1;
 	// ft_printf("Tout est ok, y = , height = %d\n", FDF.height);
-
 	while (++y < FDF.height)
 	{
 		fill_matrix_children(matrix, line_parser(get_next_line(fd)), FDF.width, y);
@@ -90,10 +90,7 @@ void	set_size_matrix(t_matrix ***matrix, char *file_name, int w, int h)
 
 t_matrix	**get_map(char *file_name, t_matrix **matrix)
 {
-	// test = set_size_test(file_name);
 	set_size_matrix(&matrix, file_name, 0, 0);
 	fill_matrix_parent(matrix, file_name);
-	// ft_free_matrix((void **)matrix, FDF.height, &free_mx_data);
 	return (matrix);
-	// return (matrix);
 }

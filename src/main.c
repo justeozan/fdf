@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:07:35 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/23 13:58:49 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/23 14:56:39 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	transform_img(t_matrix **matrix)
 			// ft_printf("test if (y < FDF.height || matrix[y + 1])\n");
 			if (y + 1 < FDF.height)
 			{
-					ft_printf("draw p to y+1\n");
+					// ft_printf("draw p to y+1\n");
 					// draw_line(FDF.img, matrix[y][x], matrix[y + 1][x]);
 				// if (matrix[y + 1][x + 1].valid) //diagnoale
 				// 	draw_line(FDF.img, matrix[y][x], matrix[y + 1][x + 1]);
@@ -96,14 +96,14 @@ void	transform_img(t_matrix **matrix)
 		}
 		y++;
 	}
-	ft_printf("ok\n");
+	// ft_printf("ok\n");
 }
 
 int	frame(t_matrix **matrix)
 {
 	init_proj_map(matrix);
 	transform_img(matrix);
-	// mlx_put_image_to_window(FDF.mlx, FDF.win, FDF.imgs.img, 0, 0);
+	mlx_put_image_to_window(FDF.mlx, FDF.win, FDF.imgs.img, 0, 0);
 	return (1);
 }
 
