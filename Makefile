@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kali <kali@student.42.fr>                  +#+  +:+       +#+         #
+#    By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/13 19:03:54 by ozasahin          #+#    #+#              #
-#    Updated: 2024/03/19 18:38:48 by kali             ###   ########.fr        #
+#    Updated: 2024/03/23 11:36:59 by ozasahin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRC		=	\
 			src/fdf.c\
 			src/free_fdf.c\
 			src/get_map.c\
+			src/key_manager.c\
 			src/main.c\
 			src/map_utils.c
 

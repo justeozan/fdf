@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:09:36 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/22 16:16:21 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/23 11:01:43 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	clean_close_imgstruct(t_matrix **matrix, t_img imgs)
 {
 	if (FDF.mlx)
-		mlx_destroy_image(FDF.mlx, p_img->img_mlx);
-	p_img->img_mlx = NULL;
+		mlx_destroy_image(FDF.mlx, imgs.img);
+	imgs.img = NULL;
 }
 
 void	free_matrix(t_matrix **matrix)
@@ -26,8 +26,12 @@ void	free_matrix(t_matrix **matrix)
 	y = FDF.height;
 	// ft_printf("dans free_matrix : y = %d\n", y);
 	while (--y > 0)
-		free((void *)matrix[y]);
+	{
+		free(matrix[y]);
+		matrix[y] = NULL;
+	}
 	free(matrix);
+	matrix = NULL;
 }
 
 int	close_program(t_matrix **matrix, char *txt_err)
@@ -35,9 +39,6 @@ int	close_program(t_matrix **matrix, char *txt_err)
 	if (!FDF.mlx)
 		exit_err(txt_err);
 	clean_close_imgstruct(matrix, FDF.imgs);
-
-	if (FDF.imgs.img)
-		mlx_destroy_image(FDF.mlx, FDF.imgs.img);
 	if (FDF.win)
 		mlx_destroy_window(FDF.mlx, FDF.win);
 	// if (FDF.imgs.addr)
@@ -49,7 +50,7 @@ int	close_program(t_matrix **matrix, char *txt_err)
 	if (txt_err != NULL)
 		exit_err(txt_err);
 	ft_printf("closing the program..\n");
-	return(EXIT_SUCCESS);
+	exit(EXIT_SUCCESS);
 }
 /*
 int	close_program(t_fdf *p_fdf, char *strerr) //hugo
@@ -70,9 +71,7 @@ int	close_program(t_fdf *p_fdf, char *strerr) //hugo
 */
 int	close_normal(t_matrix **matrix)
 {
-	int i = close_program(matrix, NULL);
-	ft_printf("ok\n");
-	return (i);
+	return (close_program(matrix, NULL));
 }
 // void	free_mx_data(void *ptr)
 // {

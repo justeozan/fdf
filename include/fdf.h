@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:17:47 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/22 15:57:07 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/23 14:44:53 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,36 @@
 # include "../libft/libft.h"
 # include "../mlx_linux/mlx.h"
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 800 //1920
+# define HEIGHT 600 //1080
 # define FDF matrix[0][0]
 
 # ifndef SCALE_FACTOR
 #  define SCALE_FACTOR 0.85
 # endif
+
+enum
+{
+	UP = 65362,
+	DOWN = 65364,
+	LEFT = 65361,
+	RIGHT = 65363,
+	SPACE = 32,
+	MINUS = 65453,
+	PLUS = 65451,
+	STAR = 65450,
+	DIV = 65455,
+	ESC = 65307,
+	UP_Z = 65365,
+	DOWN_Z = 65366,
+	ONE = 65436,
+	TWO = 65433,
+	THREE = 65435,
+	FOUR = 65430,
+	FIVE = 65437,
+	SIX = 65432
+
+};
 
 typedef struct s_img
 {
@@ -69,10 +92,11 @@ typedef struct s_matrix
 /*-------------displays-------------*/
 void	display_matrix(t_matrix **matrix, int w, int h);
 /*-------------draw_line-------------*/
-void	set_param(t_matrix *a, t_matrix *b, t_matrix *data);
-void	bresenham(t_matrix a, t_matrix b, t_matrix *data);
-void	draw_line_h(t_img img, t_matrix m0, t_matrix m1);
-void	draw_line_g(t_matrix **matrix);
+void	put_pixel(t_img imgs, int x, int y, int color);
+void	init_step(t_img *imgs, t_matrix m0, t_matrix m1);
+void    draw_acute_slope(t_img imgs, t_matrix m0, t_matrix m1);
+void	draw_acute_slope(t_img imgs, t_matrix m0, t_matrix m1);
+void	draw_line(t_img imgs, t_matrix m0, t_matrix m1);
 /*-------------fdf-------------*/
 void	define_offset(t_matrix **matrix, double scale);
 void	define_scale(t_matrix **matrix);
@@ -89,6 +113,10 @@ void	fill_matrix_children(t_matrix **matrix, char **line2d, int w, int y);
 void	fill_matrix_parent(t_matrix **matrix, char *f_name);
 void	set_size_matrix(t_matrix ***matrix, char *file_name, int w, int h);
 t_matrix	**get_map(char *file_name, t_matrix **matrix);
+/*-------------key_manager-------------*/
+int 	is_key(int key);
+void    do_key(int key, t_matrix **matrix);
+int    manage_key(int key, t_matrix **matrix);
 /*-------------main-------------*/
 void	check_args(int ac, char **av);
 int		close_hook(t_matrix **matrix);
