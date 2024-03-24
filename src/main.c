@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:07:35 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/23 14:41:49 by kali             ###   ########.fr       */
+/*   Updated: 2024/03/24 12:25:19 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,19 @@ void	check_args(int ac, char **av)
 	close(fd);
 }
 
-void	apply_scaling(t_matrix point, t_matrix **matrix)
+void	apply_scaling(t_matrix *point, t_matrix **matrix)
 {
-	//ft_printf("scale = %d\n", FDF.scale);
-	point.x_proj = point.x * ceil(FDF.scale);
-	point.y_proj = point.y * ceil(FDF.scale);
-	point.z_proj = point.z * 0.15 * FDF.scale * FDF.depth;
+	//ft_printf("1: x = %d\n", point->x_proj);
+	point->x_proj = point->x * ceil(FDF.scale);
+	ft_printf("2: x = %d\n", point->x_proj);
+	point->y_proj = point->y * ceil(FDF.scale);
+	point->z_proj = point->z * 0.15 * FDF.scale * FDF.depth;
 }
 
-void	apply_offset(t_matrix *item, t_matrix **matrix)
+void	apply_offset(t_matrix *point, t_matrix **matrix)
 {
-	item->x_proj = item->x + FDF.offset_x;
-	item->y_proj = item->y + FDF.offset_y;
+	point->x_proj = point->x + FDF.offset_x;
+	point->y_proj = point->y + FDF.offset_y;
 }
 
 void	init_proj_map(t_matrix **matrix)
@@ -55,7 +56,7 @@ void	init_proj_map(t_matrix **matrix)
 		x = 0;
 		while(matrix[y][x].valid > 0 && x < FDF.width)
 		{
-			apply_scaling(matrix[y][x], matrix);
+			apply_scaling(&matrix[y][x], matrix);
 			// apply_rotation(matrix);
 			apply_offset(&matrix[y][x], matrix);
 			x++;
@@ -108,7 +109,7 @@ int	main(int ac, char **av)
 	t_matrix	**matrix;
 
 	matrix = NULL;
-	check_args(ac, av);
+	check_args(ac, av); //ok
 	matrix = init_fdf(av[1], matrix);
 	//ft_printf("scale = %d\n", FDF.scale);
 

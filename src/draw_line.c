@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 22:10:59 by marvin            #+#    #+#             */
-/*   Updated: 2024/03/23 14:37:09 by kali             ###   ########.fr       */
+/*   Updated: 2024/03/24 12:29:38 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,21 @@ void	put_pixel(t_img imgs, int x, int y, int color)
 {
 	int	offset;
 
-	//t_printf("x = %d, y = %d\n", x, y);
+	//ft_printf("x = %d, y = %d\n", x, y);
 	offset = (imgs.line_len * y) + (imgs.bits_per_pixel * x / 8);
 	if (x >= 0 && x < WIDTH && y > 0 && y < HEIGHT)
 		*((int *)(imgs.addr + offset)) = color;
 	
 }
 
-void    draw_acute_slope(t_img imgs, t_matrix m0, t_matrix m1)
+void	draw_acute_slope(t_img imgs, t_matrix m0, t_matrix m1)
 {
 	// int nb_step;
 	
 	// nb_step = 0;
 	while (m0.x_proj != m1.x_proj)
 	{
+		ft_printf("x = %d, y = %d\n", m0.x_proj, m0.y_proj);
 		if (m0.x_proj >= 0 && m0.x_proj < WIDTH && m0.y_proj > 0 && m0.y_proj < HEIGHT)
 			put_pixel(imgs, m0.x_proj, m0.y_proj, m0.color);
 		m0.x_proj += imgs.x_step;

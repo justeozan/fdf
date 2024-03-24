@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:17:47 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/23 14:52:15 by kali             ###   ########.fr       */
+/*   Updated: 2024/03/24 12:15:25 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define FDF matrix[0][0]
 
 # ifndef SCALE_FACTOR
-#  define SCALE_FACTOR 0.85
+#  define SCALE_FACTOR 1
 # endif
 
 enum
@@ -83,6 +83,9 @@ typedef struct s_matrix
 	double	depth;
 	int		offset_x;
 	int		offset_y;
+	double	rot_x;
+	double	rot_y;
+	double	rot_z;
 	void	*mlx;
 	void	*win;
 	t_img	imgs;
@@ -120,8 +123,8 @@ int		manage_key(int key, t_matrix **matrix);
 /*-------------main-------------*/
 void	check_args(int ac, char **av);
 int		close_hook(t_matrix **matrix);
-void	apply_scaling(t_matrix point, t_matrix **matrix);
-void	apply_offset(t_matrix *item, t_matrix **matrix);
+void	apply_scaling(t_matrix *point, t_matrix **matrix);
+void	apply_offset(t_matrix *point, t_matrix **matrix);
 void	init_proj_map(t_matrix **matrix);
 void	transform_img(t_matrix **matrix);
 int		frame(t_matrix **matrix);
