@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:17:47 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/24 12:15:25 by kali             ###   ########.fr       */
+/*   Updated: 2024/03/25 12:59:28 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@
 # include "../libft/libft.h"
 # include "../mlx_linux/mlx.h"
 
-# define WIDTH 800 //1920
-# define HEIGHT 600 //1080
+# define WIDTH 1920
+# define HEIGHT 1080
 # define FDF matrix[0][0]
 
 # ifndef SCALE_FACTOR
-#  define SCALE_FACTOR 1
+#  define SCALE_FACTOR 0.25
 # endif
 
 enum
@@ -92,14 +92,21 @@ typedef struct s_matrix
 }	t_matrix;
 
 
+/*-------------create_frame-------------*/
+void	apply_scaling(t_matrix *point, t_matrix **matrix);
+void	apply_offset(t_matrix *point, t_matrix **matrix);
+void	init_proj_map(t_matrix **matrix);
+void	transform_img(t_matrix **matrix);
+int		frame(t_matrix **matrix);
 /*-------------displays-------------*/
 void	display_matrix(t_matrix **matrix, int w, int h);
 /*-------------draw_line-------------*/
 void	put_pixel(t_img imgs, int x, int y, int color);
-void	init_step(t_img *imgs, t_matrix m0, t_matrix m1);
+void	init_step(t_img *imgs, t_matrix *m0, t_matrix *m1);
 void    draw_acute_slope(t_img imgs, t_matrix m0, t_matrix m1);
 void	draw_acute_slope(t_img imgs, t_matrix m0, t_matrix m1);
 void	draw_line(t_img imgs, t_matrix m0, t_matrix m1);
+void	draw_line_2(t_img imgs, t_matrix m0, t_matrix m1);
 /*-------------fdf-------------*/
 void	define_offset(t_matrix **matrix, double scale);
 void	define_scale(t_matrix **matrix);
@@ -123,11 +130,6 @@ int		manage_key(int key, t_matrix **matrix);
 /*-------------main-------------*/
 void	check_args(int ac, char **av);
 int		close_hook(t_matrix **matrix);
-void	apply_scaling(t_matrix *point, t_matrix **matrix);
-void	apply_offset(t_matrix *point, t_matrix **matrix);
-void	init_proj_map(t_matrix **matrix);
-void	transform_img(t_matrix **matrix);
-int		frame(t_matrix **matrix);
 int		main(int ac, char **av);
 /*-------------map_utils-------------*/
 void	ft_display_tab2d(char **strs);

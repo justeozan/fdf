@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:09:36 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/23 11:01:43 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/25 11:38:25 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	free_matrix(t_matrix **matrix)
 	int	y;
 
 	y = FDF.height;
-	// ft_printf("dans free_matrix : y = %d\n", y);
 	while (--y > 0)
 	{
 		free(matrix[y]);

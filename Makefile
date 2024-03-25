@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kali <kali@student.42.fr>                  +#+  +:+       +#+         #
+#    By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/13 19:03:54 by ozasahin          #+#    #+#              #
-#    Updated: 2024/03/23 14:48:47 by kali             ###   ########.fr        #
+#    Updated: 2024/03/25 11:34:33 by ozasahin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,11 +15,12 @@
 NAME	=	fdf
 
 SRC		=	\
+			src/create_frame.c\
 			src/displays.c\
 			src/draw_line.c\
-			src/fdf.c\
 			src/free_fdf.c\
 			src/get_map.c\
+			src/init_fdf.c\
 			src/key_manager.c\
 			src/main.c\
 			src/map_utils.c
