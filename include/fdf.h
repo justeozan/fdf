@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:17:47 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/25 12:59:28 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/25 16:12:49 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <stdio.h>	// A SURTOUT ENLEVER
 # include <math.h>
 # include "../libft/libft.h"
 # include "../mlx_linux/mlx.h"
@@ -58,10 +59,10 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		line_len;
 	int		endian;
-	int		x_diff;
-	int		y_diff;
-	int		x_step;
-	int		y_step;
+	float		x_diff;
+	float		y_diff;
+	float		x_step;
+	float		y_step;
 	int		decision;
 }	t_img;
 

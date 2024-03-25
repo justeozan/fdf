@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 11:32:08 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/25 13:12:42 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:33:23 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,15 @@ void	apply_offset(t_matrix *point, t_matrix **matrix)
 	point->y_proj += point->y + FDF.offset_y;
 }
 
+void	apply_isometric(t_matrix *point, t_matrix **matrix)
+{
+	if (FDF.is_isometric)
+	{
+		point->x_proj = (point->x_proj - point->y_proj) * cos(FDF.angle);
+		point->y_proj = (point->x_proj + point->y_proj) * sin(FDF.angle) - point->z_proj;
+	}
+}
+
 void	init_proj_map(t_matrix **matrix)
 {
 	int	x;
@@ -39,6 +48,7 @@ void	init_proj_map(t_matrix **matrix)
 			apply_scaling(&matrix[y][x], matrix);
 			// apply_rotation(matrix);
 			apply_offset(&matrix[y][x], matrix);
+			apply_isometric(&matrix[y][x], matrix);
 			x++;
 		}
 		y++;
@@ -57,15 +67,16 @@ void	transform_img(t_matrix **matrix)
 		x = 0;
 		while (x < FDF.width && matrix[y][x].valid)
 		{
-			if (x + 1 < FDF.width || matrix[y][x + 1].valid)
+			// if (x + 1 < FDF.width || matrix[y][x + 1].valid)
+			if (x + 1 < FDF.width)
 			{
-				draw_line_2(FDF.imgs, matrix[y][x], matrix[y][x + 1]);
+				draw_line(FDF.imgs, matrix[y][x], matrix[y][x + 1]);
 			}
 			if (y + 1 < FDF.height)
 			{
-				draw_line_2(FDF.imgs, matrix[y][x], matrix[y + 1][x]);
-				// if (matrix[y + 1][x + 1].valid) //diagnoale
-				// 	draw_line(FDF.img, matrix[y][x], matrix[y + 1][x + 1]);
+				draw_line(FDF.imgs, matrix[y][x], matrix[y + 1][x]);
+				// if (x + 1 < FDF.width)
+				// draw_line(FDF.imgs, matrix[y][x], matrix[y + 1][x + 1]);
 			}
 			x++;
 		}
