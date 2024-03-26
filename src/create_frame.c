@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 11:32:08 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/25 15:33:23 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/26 10:10:07 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	init_proj_map(t_matrix **matrix)
 		{
 			apply_scaling(&matrix[y][x], matrix);
 			// apply_rotation(matrix);
-			apply_offset(&matrix[y][x], matrix);
 			apply_isometric(&matrix[y][x], matrix);
+			apply_offset(&matrix[y][x], matrix);
 			x++;
 		}
 		y++;
@@ -65,9 +65,8 @@ void	transform_img(t_matrix **matrix)
 	while (y < FDF.height)
 	{
 		x = 0;
-		while (x < FDF.width && matrix[y][x].valid)
+		while (x < FDF.width)
 		{
-			// if (x + 1 < FDF.width || matrix[y][x + 1].valid)
 			if (x + 1 < FDF.width)
 			{
 				draw_line(FDF.imgs, matrix[y][x], matrix[y][x + 1]);

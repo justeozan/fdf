@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:07:35 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/25 17:01:05 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/26 10:46:15 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	main(int ac, char **av)
 	// mlx_hook(FDF.win, 2, 1L << 0, manage_keyhook, matrix);//mlx_key_hook
 	// mlx_key_hook(FDF.win, manage_key, matrix);
 	mlx_hook(FDF.win, 2, 1L << 0, manage_key, matrix);
-	frame(matrix);
-	// mlx_loop_hook(FDF.mlx, frame, matrix);
+	// frame(matrix);
+	mlx_loop_hook(FDF.mlx, frame, matrix);
 	mlx_loop(FDF.mlx);
 	return (close_program(matrix, NULL));
 }
