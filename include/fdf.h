@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:17:47 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/26 10:13:27 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:01:24 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@
 # include "../libft/libft.h"
 # include "../mlx_linux/mlx.h"
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 3500//1920 //3500
+# define HEIGHT 1900//1080 //1900
 # define FDF matrix[0][0]
 
 # ifndef SCALE_FACTOR
-#  define SCALE_FACTOR 0.25
+#  define SCALE_FACTOR 0.65
 # endif
 
 enum
@@ -49,7 +49,11 @@ enum
 	FOUR = 65430,
 	FIVE = 65437,
 	SIX = 65432,
-	V = 118
+	V = 118,
+	W = 119,
+	D = 100,
+	S = 115,
+	A = 97
 };
 
 typedef struct s_img
@@ -93,6 +97,11 @@ typedef struct s_matrix
 }	t_matrix;
 
 
+/*-------------apply_rotation-------------*/
+void	apply_rot_x(t_matrix *point, double cos_a, double sin_a);
+void	apply_rot_y(t_matrix *point, double cos_a, double sin_a);
+void	apply_rot_z(t_matrix *point, double cos_a, double sin_a);
+void	apply_rotation(t_matrix *point, t_matrix **matrix);
 /*-------------create_frame-------------*/
 void	apply_scaling(t_matrix *point, t_matrix **matrix);
 void	apply_offset(t_matrix *point, t_matrix **matrix);
@@ -136,6 +145,8 @@ int		main(int ac, char **av);
 void	ft_display_tab2d(char **strs);
 int		get_width(char *line);
 int		get_height(char *file_name);
+char	**extract_first_part(char *s, int *i);
+char	**ft_split_color(char *s);
 
 
 #endif

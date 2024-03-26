@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:21:30 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/22 16:07:43 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:26:15 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,11 @@ void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 void	*ft_memset(void *s, int c, size_t n);
 /*-------------nbr-------------*/
+int		verif(char *b, int lb);
+int		char_in_base(char c, char *b);
+int		ft_pow(int lb, int p);
+int		change_base(char *str, char *b, int i, int j);
+int		ft_atoi_base(char *str, char *base);
 int		ft_atoi(const char *nptr);
 char	*ft_itoa(int n);
 /*-------------printf-------------*/

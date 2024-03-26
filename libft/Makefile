@@ -6,7 +6,7 @@
 #    By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/13 16:43:33 by ozasahin          #+#    #+#              #
-#    Updated: 2024/02/23 16:00:13 by ozasahin         ###   ########.fr        #
+#    Updated: 2024/03/26 15:25:16 by ozasahin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ SRCS	=	\
 			mem/ft_memcpy.c\
 			mem/ft_memmove.c\
 			\
+			nbr/ft_atoi_base.c\
 			nbr/ft_atoi.c\
 			nbr/ft_itoa.c\
 			\

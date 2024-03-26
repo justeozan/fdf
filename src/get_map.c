@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 15:13:03 by marvin            #+#    #+#             */
-/*   Updated: 2024/03/23 14:53:11 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:05:17 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,25 @@ char	**line_parser(char *line)
 void	fill_matrix_children(t_matrix **matrix, char **line2d, int w, int y)
 {
 	int	x;
+	char **values;
 
 	x = -1;
-
 	if (!line2d | !(*line2d))
 		close_program(matrix, "Error\n");
 	while (++x < w)
 	{
 		matrix[y][x].x = x;
 		matrix[y][x].y = y;
-		matrix[y][x].z = ft_atoi(line2d[x]);
-		matrix[y][x].color = 0xFFFFFF;
-		matrix[y][x].valid = 1;
+		// matrix[y][x].z = ft_atoi(line2d[x]);
+		// matrix[y][x].color = 0xFFFFFF;
+		values = ft_split_color(line2d[x]);
+		matrix[y][x].z = ft_atoi(values[0]);
+		matrix[y][x].color = ft_atoi_base(values[1], "0123456789abcdef");
+		// ft_printf("color = %d\n", matrix[y][x].color);
+		// matrix[y][x].valid = 1;
 	}
 	ft_free2d(line2d);
-	matrix[y][x].valid = 0;
+	// matrix[y][x].valid = 0;
 }
 
 void	fill_matrix_parent(t_matrix **matrix, char *f_name)

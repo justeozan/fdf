@@ -6,7 +6,7 @@
 #    By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/13 19:03:54 by ozasahin          #+#    #+#              #
-#    Updated: 2024/03/25 11:34:33 by ozasahin         ###   ########.fr        #
+#    Updated: 2024/03/26 14:24:07 by ozasahin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@
 NAME	=	fdf
 
 SRC		=	\
+			src/apply_rotation.c\
 			src/create_frame.c\
 			src/displays.c\
 			src/draw_line.c\

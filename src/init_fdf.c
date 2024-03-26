@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:23:20 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/26 09:58:56 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:38:55 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	init_proj(t_matrix **matrix)
 	printf("scale = %f, offset_x = %d, offset_y = %d\n", FDF.scale, FDF.offset_x, FDF.offset_y);
 	FDF.imgs.x_step = 1;
 	FDF.imgs.y_step = 1;
-	// FDF.rot_x = -0.52;
-	// FDF.rot_y = 0.52;
-	// FDF.rot_z = 0;
+	FDF.rot_x = -0.52;
+	FDF.rot_y = 0.52;
+	FDF.rot_z = 0;
 	FDF.depth = 1;
 }
 
