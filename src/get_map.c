@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 15:13:03 by marvin            #+#    #+#             */
-/*   Updated: 2024/03/26 16:05:17 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:28:54 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ char	**line_parser(char *line)
 
 	if (!line)
 		return (NULL);
-
 	splitted_line = ft_split(line, ' ');
 	free (line);
 	return (splitted_line);
@@ -39,12 +38,20 @@ void	fill_matrix_children(t_matrix **matrix, char **line2d, int w, int y)
 		// matrix[y][x].z = ft_atoi(line2d[x]);
 		// matrix[y][x].color = 0xFFFFFF;
 		values = ft_split_color(line2d[x]);
+		if (x == 12 && line2d[x] != 0)
+		{
+			ft_printf("%d: line2d = %s\n", x, line2d[x]);
+			ft_printf("values[0] = %s, values[1] = %s\n", values[0], values[1]);
+		}
+		// if (!values || !values[0])
+		// 	return (ft_free2d(values));
 		matrix[y][x].z = ft_atoi(values[0]);
 		matrix[y][x].color = ft_atoi_base(values[1], "0123456789abcdef");
 		// ft_printf("color = %d\n", matrix[y][x].color);
 		// matrix[y][x].valid = 1;
 	}
 	ft_free2d(line2d);
+	ft_free2d(values);
 	// matrix[y][x].valid = 0;
 }
 

@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:11:35 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/26 16:02:39 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:33:58 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ char	**ft_split_color(char *s)
 	strs = extract_first_part(s, &i);
 	if (!strs || !strs[0])
 		return (ft_free2d(strs), NULL);
-	if (ft_strnstr(s, ",0x", 3))
+	if (ft_strnstr_2(s, ",0x", 3))
 	{
 		strs[1] = (char *)malloc((ft_strlen(s) - i + 1) * sizeof(char));
 		if (!strs[1])
