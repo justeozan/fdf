@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 13:55:46 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/27 14:58:21 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/27 14:06:09 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	define_switchs(t_matrix **matrix)
 {
 	FDF.switchs.isometric = 0;
 	FDF.switchs.wiggle = 0;
-	FDF.switchs.diagonal = -1;
-	FDF.switchs.gradient = -1;
+	FDF.switchs.gradient = 0;
+	FDF.switchs.diagonal = 0;
 	FDF.switchs.bonus = 1;
 }
 

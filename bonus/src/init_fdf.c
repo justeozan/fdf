@@ -6,11 +6,13 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:23:20 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/27 15:31:37 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/27 13:55:57 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
+
+
 
 void	init_proj(t_matrix **matrix)
 {
@@ -32,7 +34,7 @@ t_img	init_new_image(t_matrix	**matrix)
 	if (!img.img)
 		exit_err("Error, init_new_image");
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
-			&img.line_len, &img.endian);
+		&img.line_len, &img.endian);
 	if (!img.addr)
 		exit_err("Error, init_new_image");
 	return (img);

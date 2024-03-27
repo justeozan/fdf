@@ -6,22 +6,23 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:25:31 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/02/26 14:41:41 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/27 16:24:11 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../libft.h"
 
-void	ft_free2d(char **strs)
+int	ft_free2d(char **strs)
 {
 	unsigned int	i;
 
 	i = 0;
 	if (strs == NULL || *strs == NULL)
-		return ;
+		return (-1);
 	while (strs[i])
 		free(strs[i++]);
 	free(strs);
+	return (0);
 }
 
 void	ft_freen2d(char **strs, size_t nb_subs)

@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:21:30 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/26 16:33:42 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/27 16:23:03 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <stdarg.h>
 
 /*-------------err-------------*/
-void	norm_is_not_ok(char **line);
 void	exit_err(char *err_txt);
 /*-------------file-------------*/
 void	ft_putchar_fd(char c, int fd);
@@ -31,7 +30,7 @@ void	ft_free_matrix(void **matrix, int height, void (*free_func)(void *));
 void	ft_free_matrix_(void **matrix, int height, void (*free_func)(void *));
 void	ft_fmxe(void **matrix, int h, void (*f)(void *), char *err_txt);
 void	ft_fmxe_(void **matrix, int h, void (*f)(void *), char *err_txt);
-void	ft_free2d(char **strs);
+int		ft_free2d(char **strs);
 void	ft_freen2d(char **strs, size_t nb_subs);
 /*-------------gnl-------------*/
 # ifndef BUFFER_SIZE

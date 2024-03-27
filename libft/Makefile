@@ -6,14 +6,13 @@
 #    By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/13 16:43:33 by ozasahin          #+#    #+#              #
-#    Updated: 2024/03/26 15:25:16 by ozasahin         ###   ########.fr        #
+#    Updated: 2024/03/27 16:18:32 by ozasahin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	libft.a
 
 SRCS	=	\
-			err/ft_norm_err.c\
 			err/ft_print_err.c\
 			\
 			file/ft_putchar_fd.c\

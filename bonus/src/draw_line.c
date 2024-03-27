@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 22:10:59 by marvin            #+#    #+#             */
-/*   Updated: 2024/03/27 15:30:27 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/27 11:26:42 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	put_pixel(t_img imgs, int x, int y, int color)
 		*((int *)(imgs.addr + offset)) = color;
 }
 
-void	draw_acute_slope(t_img imgs, t_matrix m0, t_matrix m1, t_matrix **m)
+
+void	draw_acute_slope(t_img imgs, t_matrix m0, t_matrix m1)
 {
 	int	nb_steps;
 	int	gradient;
@@ -29,7 +30,7 @@ void	draw_acute_slope(t_img imgs, t_matrix m0, t_matrix m1, t_matrix **m)
 	nb_steps = 0;
 	while (m0.x_proj != m1.x_proj)
 	{
-		if (m0.color != m1.color && m[0][0].switchs.gradient == 1)
+		if (m0.color != m1.color)
 			gradient = process_color(nb_steps, imgs.x_diff, m0.color, m1.color);
 		else
 			gradient = m0.color;
@@ -48,7 +49,7 @@ void	draw_acute_slope(t_img imgs, t_matrix m0, t_matrix m1, t_matrix **m)
 	}
 }
 
-void	draw_obtus_slope(t_img imgs, t_matrix m0, t_matrix m1, t_matrix **m)
+void	draw_obtus_slope(t_img imgs, t_matrix m0, t_matrix m1)
 {
 	int	nb_steps;
 	int	gradient;
@@ -56,7 +57,7 @@ void	draw_obtus_slope(t_img imgs, t_matrix m0, t_matrix m1, t_matrix **m)
 	nb_steps = 0;
 	while (m0.y_proj != m1.y_proj)
 	{
-		if (m0.color != m1.color && m[0][0].switchs.gradient == 1)
+		if (m0.color != m1.color)
 			gradient = process_color(nb_steps, imgs.y_diff, m0.color, m1.color);
 		else
 			gradient = m0.color;
@@ -74,7 +75,6 @@ void	draw_obtus_slope(t_img imgs, t_matrix m0, t_matrix m1, t_matrix **m)
 		nb_steps++;
 	}
 }
-
 void	init_step(t_img *imgs, t_matrix *m0, t_matrix *m1)
 {
 	imgs->x_diff = abs(m1->x_proj - m0->x_proj);
@@ -85,17 +85,17 @@ void	init_step(t_img *imgs, t_matrix *m0, t_matrix *m1)
 		imgs->y_step = -1;
 }
 
-void	draw_line(t_img imgs, t_matrix m0, t_matrix m1, t_matrix **matrix)
+void	draw_line(t_img imgs, t_matrix m0, t_matrix m1)
 {
 	init_step(&imgs, &m0, &m1);
 	if (imgs.x_diff >= imgs.y_diff)
 	{
 		imgs.decision = (2 * imgs.y_diff) - imgs.x_diff;
-		draw_acute_slope(imgs, m0, m1, matrix);
+		draw_acute_slope(imgs, m0, m1);
 	}
 	else
 	{
 		imgs.decision = (2 * imgs.x_diff) - imgs.y_diff;
-		draw_obtus_slope(imgs, m0, m1, matrix);
+		draw_obtus_slope(imgs, m0, m1);
 	}
 }

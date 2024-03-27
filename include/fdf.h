@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:17:47 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/27 14:05:39 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/27 16:22:11 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,18 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include <stdio.h>	// A SURTOUT ENLEVER
 # include <math.h>
 # include "../libft/libft.h"
 # include "../mlx_linux/mlx.h"
 
-# define WIDTH 1920//1920 //3500
-# define HEIGHT 1080//1080 //1900
-# define FDF matrix[0][0]
+# define WIDTH	1920
+# define HEIGHT	1080
+
+# ifndef FDF
+#  define FDF matrix[0][0]
+# endif
+
+# define M matrix
 
 # ifndef SCALE_FACTOR
 #  define SCALE_FACTOR 0.65
@@ -49,6 +53,9 @@ enum
 	FOUR = 65430,
 	FIVE = 65437,
 	SIX = 65432,
+	Z = 122,
+	X = 120,
+	C = 99,
 	V = 118,
 	W = 119,
 	D = 100,
@@ -66,25 +73,25 @@ typedef struct s_argb
 
 typedef struct s_switch
 {
-	int	isometric;
-	int	wiggle;
-	int	gradient;
-	int	diagonal;
-	int	bonus;
+	int			isometric;
+	int			wiggle;
+	int			gradient;
+	int			diagonal;
+	int			bonus;
 }	t_switch;
 
 typedef struct s_img
 {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_len;
-	int		endian;
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_len;
+	int			endian;
 	float		x_diff;
 	float		y_diff;
 	float		x_step;
 	float		y_step;
-	int		decision;
+	int			decision;
 }	t_img;
 
 typedef struct s_matrix
@@ -114,67 +121,68 @@ typedef struct s_matrix
 	t_switch	switchs;
 }	t_matrix;
 
-/*-------------apply_rotation-------------*/
-void	apply_rot_x(t_matrix *point, double cos_a, double sin_a);
-void	apply_rot_y(t_matrix *point, double cos_a, double sin_a);
-void	apply_rot_z(t_matrix *point, double cos_a, double sin_a);
-void	apply_rotation(t_matrix *point, t_matrix **matrix);
+/*=================UTILS=================*/
 /*-------------color_utils.c-------------*/
-
-t_argb	create_argb(int color);
-int		create_color_gradient(float delta, t_argb color1, t_argb color2);
-int		process_color(int curr_steps, int tot_steps, int color_ini, int color_end);
+void		add_color(t_matrix **matrix);
+t_argb		create_argb(int color);
+int			create_color_gradient(float delta, t_argb color1, t_argb color2);
+int			process_color(int curr_steps, int tot_steps, int color_ini, int color_end);
+/*-------------map_utils-------------*/
+void		ft_display_tab2d(char **strs);
+int			get_width(char *line);
+int			get_height(char *file_name);
+char		**extract_first_part(char *s, int *i);
+char		**ft_split_color(char *s);
+/*-------------proj_utils-------------*/
+void		define_switchs(t_matrix **matrix);
+void		define_scale(t_matrix **matrix);
+void		define_rotation(t_matrix **matrix);
+void		define_offset(t_matrix **matrix);
+/*=================SRC=================*/
+/*-------------apply_rotation-------------*/
+void		apply_rot_x(t_matrix *point, double cos_a, double sin_a);
+void		apply_rot_y(t_matrix *point, double cos_a, double sin_a);
+void		apply_rot_z(t_matrix *point, double cos_a, double sin_a);
+void		apply_rotation(t_matrix *point, t_matrix **matrix);
 /*-------------create_frame-------------*/
-void	apply_scaling(t_matrix *point, t_matrix **matrix);
-void	apply_offset(t_matrix *point, t_matrix **matrix);
-void	init_proj_map(t_matrix **matrix);
-void	transform_img(t_matrix **matrix);
-int		frame(t_matrix **matrix);
-/*-------------displays-------------*/
-void	display_matrix(t_matrix **matrix, int w, int h);
+void		apply_scaling(t_matrix *point, t_matrix **matrix);
+void		apply_offset(t_matrix *point, t_matrix **matrix);
+void		init_proj_map(t_matrix **matrix);
+void		transform_img(t_matrix **matrix);
+int			frame(t_matrix **matrix);
 /*-------------draw_line-------------*/
-void	put_pixel(t_img imgs, int x, int y, int color);
-void	init_step(t_img *imgs, t_matrix *m0, t_matrix *m1);
-void    draw_acute_slope(t_img imgs, t_matrix m0, t_matrix m1);
-void	draw_acute_slope(t_img imgs, t_matrix m0, t_matrix m1);
-void	draw_line(t_img imgs, t_matrix m0, t_matrix m1);
-void	draw_line_2(t_img imgs, t_matrix m0, t_matrix m1);
-/*-------------init_fdf-------------*/
-void	define_scale(t_matrix **matrix);
-void	define_offset(t_matrix **matrix);
-void	init_proj(t_matrix **matrix);
-t_img	init_new_image(t_matrix	**matrix);
-t_matrix	**init_fdf(char *file_name, t_matrix **matrix);
+void		put_pixel(t_img imgs, int x, int y, int color);
+void		init_step(t_img *imgs, t_matrix *m0, t_matrix *m1);
+void		draw_acute_slope(t_img imgs, t_matrix m0, t_matrix m1, t_matrix **m);
+void		draw_acute_slope(t_img imgs, t_matrix m0, t_matrix m1, t_matrix **m);
+void		draw_line(t_img imgs, t_matrix m0, t_matrix m1, t_matrix **matrix);
 /*-------------free_fdf-------------*/
-int		close_program(t_matrix **matrix, char *txt_err);
-int		close_normal(t_matrix **matrix);
-void	free_mx_data(void *ptr);
+int			close_program(t_matrix **matrix, char *txt_err);
+int			close_normal(t_matrix **matrix);
+void		free_mx_data(void *ptr);
 /*-------------get_map-------------*/
-char	**line_parser(char *line);
-void	fill_matrix_children(t_matrix **matrix, char **line2d, int w, int y);
-void	fill_matrix_parent(t_matrix **matrix, char *f_name);
-void	set_size_matrix(t_matrix ***matrix, char *file_name, int w, int h);
+char		**line_parser(char *line);
+int			fill_matrix_children(t_matrix **matrix, char **line2d, int w, int y);
+void		fill_matrix_parent(t_matrix **matrix, char *f_name);
+void		set_size_matrix(t_matrix ***matrix, char *file_name, int w, int h);
 t_matrix	**get_map(char *file_name, t_matrix **matrix);
+/*-------------init_fdf-------------*/
+void		define_scale(t_matrix **matrix);
+void		define_offset(t_matrix **matrix);
+void		init_proj(t_matrix **matrix);
+t_img		init_new_image(t_matrix	**matrix);
+t_matrix	**init_fdf(char *file_name, t_matrix **matrix);
 /*-------------key_manager-------------*/
-int 	is_key(int key);
-void	do_key(int key, t_matrix **matrix);
-int		manage_key(int key, t_matrix **matrix);
+int 		is_key(int key);
+void		do_key(int key, t_matrix **matrix);
+int			manage_key(int key, t_matrix **matrix);
 /*-------------main-------------*/
-void	check_args(int ac, char **av);
-int		close_hook(t_matrix **matrix);
-int		main(int ac, char **av);
-/*-------------map_utils-------------*/
-void	ft_display_tab2d(char **strs);
-int		get_width(char *line);
-int		get_height(char *file_name);
-char	**extract_first_part(char *s, int *i);
-char	**ft_split_color(char *s);
-/*-------------map_utils-------------*/
-void	define_switchs(t_matrix **matrix);
-void	define_scale(t_matrix **matrix);
-void	define_rotation(t_matrix **matrix);
-void	define_offset(t_matrix **matrix);
-
-
+void		check_args(int ac, char **av);
+int			close_hook(t_matrix **matrix);
+int			main(int ac, char **av);
+/*-------------others-------------*/
+void		new_image(t_matrix **matrix);
+void		draw_black(t_matrix **matrix);
+void		display_matrix(t_matrix **matrix, int w, int h);
 
 #endif

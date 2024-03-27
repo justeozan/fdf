@@ -6,26 +6,11 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 09:44:07 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/27 15:28:58 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/27 09:48:27 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
-
-void	add_color(t_matrix **matrix)
-{
-	int	y;
-	int	x;
-
-	y = -1;
-	while (++y < FDF.height)
-	{
-		x = -1;
-		while (++x < FDF.width)
-			if (matrix[y][x].z != 0)
-				matrix[y][x].color = 0xFFFB992;
-	}
-}
 
 t_argb	create_argb(int color)
 {
