@@ -6,23 +6,23 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 11:07:58 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/27 12:43:24 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/27 15:38:43 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-int is_key(int key)
+int	is_key(int key)
 {
-	return(key == UP || key == DOWN || key == LEFT || key == RIGHT
-	|| key == SPACE || key == MINUS || key == PLUS || key == STAR || key == DIV
-	|| key == UP_Z || key == DOWN_Z || key == W || key == D
-	|| key == S || key == A);
+	return (key == UP || key == DOWN || key == LEFT || key == RIGHT
+		|| key == SPACE || key == MINUS || key == PLUS || key == STAR
+		|| key == DIV || key == UP_Z || key == DOWN_Z || key == W
+		|| key == D || key == S || key == A);
 }
 
-int is_keymod(int key)
+int	is_keymod(int key)
 {
-	return(key == V);
+	return (key == Z || key == X || key == C || key == V);
 }
 
 void	do_key(int key, t_matrix **matrix)
@@ -51,11 +51,14 @@ void	do_key(int key, t_matrix **matrix)
 		FDF.rot_y += 0.10;
 	if (key == RIGHT)
 		FDF.rot_y -= 0.10;
-	
 }
 
-void	do_mod(int	key, t_matrix **matrix)
+void	do_mod(int key, t_matrix **matrix)
 {
+	if (key == Z)
+		FDF.switchs.diagonal *= -1;
+	if (key == X)
+		FDF.switchs.gradient *= -1;
 	if (key == V)
 	{
 		if (FDF.switchs.isometric == 1)
@@ -63,30 +66,6 @@ void	do_mod(int	key, t_matrix **matrix)
 		else
 			FDF.switchs.isometric = 1;
 	}
-}
-
-void	draw_black(t_matrix **matrix)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < HEIGHT)
-	{
-		x = 0;
-		while (x < WIDTH)
-		{
-			put_pixel(FDF.imgs, x, y, 0);
-			x++;
-		}
-		y++;
-	}
-}
-
-void	new_image(t_matrix **matrix)
-{
-	FDF.imgs.img = mlx_new_image(FDF.mlx, WIDTH, HEIGHT);
-	FDF.imgs.addr = mlx_get_data_addr(FDF.imgs.img, &FDF.imgs.bits_per_pixel, &FDF.imgs.line_len, &FDF.imgs.endian);
 }
 
 int	manage_key(int key, t_matrix **matrix)

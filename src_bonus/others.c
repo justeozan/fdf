@@ -1,23 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   displays.c                                         :+:      :+:    :+:   */
+/*   others.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:36:57 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/22 16:07:53 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/27 16:14:31 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
+
+void	new_image(t_matrix **matrix)
+{
+	FDF.imgs.img = mlx_new_image(FDF.mlx, WIDTH, HEIGHT);
+	FDF.imgs.addr = mlx_get_data_addr(FDF.imgs.img, &FDF.imgs.bits_per_pixel,
+			&FDF.imgs.line_len, &FDF.imgs.endian);
+}
+
+void	draw_black(t_matrix **matrix)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			put_pixel(FDF.imgs, x, y, 0);
+			x++;
+		}
+		y++;
+	}
+}
 
 void	display_matrix(t_matrix **matrix, int w, int h)
 {
 	int	x;
 	int	y;
 
-	ft_printf("--\nwidth = %d, heiight = %d\n--\n", FDF.width, FDF.height);
+	ft_printf("--\nwidth = %d, height = %d\n--\n", FDF.width, FDF.height);
 	if (!matrix || !(*matrix) || w < 0 || h < 0)
 		exit_err("Error! display_matrix: matrix is NULL\n");
 	ft_printf(" ");
