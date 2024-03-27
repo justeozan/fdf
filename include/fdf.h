@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:17:47 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/26 16:01:24 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/27 14:05:39 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include "../libft/libft.h"
 # include "../mlx_linux/mlx.h"
 
-# define WIDTH 3500//1920 //3500
-# define HEIGHT 1900//1080 //1900
+# define WIDTH 1920//1920 //3500
+# define HEIGHT 1080//1080 //1900
 # define FDF matrix[0][0]
 
 # ifndef SCALE_FACTOR
@@ -56,6 +56,23 @@ enum
 	A = 97
 };
 
+typedef struct s_argb
+{
+	unsigned char	a;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+}	t_argb;
+
+typedef struct s_switch
+{
+	int	isometric;
+	int	wiggle;
+	int	gradient;
+	int	diagonal;
+	int	bonus;
+}	t_switch;
+
 typedef struct s_img
 {
 	void	*img;
@@ -72,36 +89,41 @@ typedef struct s_img
 
 typedef struct s_matrix
 {
-	int		x;
-	int		y;
-	int		z;
-	int		color;
-	int		x_proj;
-	int		y_proj;
-	int		z_proj;
-	int		valid;
-	int		is_isometric;
-	int		height;
-	int		width;
-	double	scale;
-	double	angle;
-	double	depth;
-	int		offset_x;
-	int		offset_y;
-	double	rot_x;
-	double	rot_y;
-	double	rot_z;
-	void	*mlx;
-	void	*win;
-	t_img	imgs;
+	int			x;
+	int			y;
+	int			z;
+	int			color;
+	int			x_proj;
+	int			y_proj;
+	int			z_proj;
+	int			is_isometric;
+	int			height;
+	int			width;
+	double		scale;
+	double		depth;
+	int			offset_x;
+	int			offset_y;
+	int			center_x;
+	int			center_y;
+	double		rot_x;
+	double		rot_y;
+	double		rot_z;
+	void		*mlx;
+	void		*win;
+	t_img		imgs;
+	t_switch	switchs;
 }	t_matrix;
-
 
 /*-------------apply_rotation-------------*/
 void	apply_rot_x(t_matrix *point, double cos_a, double sin_a);
 void	apply_rot_y(t_matrix *point, double cos_a, double sin_a);
 void	apply_rot_z(t_matrix *point, double cos_a, double sin_a);
 void	apply_rotation(t_matrix *point, t_matrix **matrix);
+/*-------------color_utils.c-------------*/
+
+t_argb	create_argb(int color);
+int		create_color_gradient(float delta, t_argb color1, t_argb color2);
+int		process_color(int curr_steps, int tot_steps, int color_ini, int color_end);
 /*-------------create_frame-------------*/
 void	apply_scaling(t_matrix *point, t_matrix **matrix);
 void	apply_offset(t_matrix *point, t_matrix **matrix);
@@ -117,9 +139,9 @@ void    draw_acute_slope(t_img imgs, t_matrix m0, t_matrix m1);
 void	draw_acute_slope(t_img imgs, t_matrix m0, t_matrix m1);
 void	draw_line(t_img imgs, t_matrix m0, t_matrix m1);
 void	draw_line_2(t_img imgs, t_matrix m0, t_matrix m1);
-/*-------------fdf-------------*/
-void	define_offset(t_matrix **matrix, double scale);
+/*-------------init_fdf-------------*/
 void	define_scale(t_matrix **matrix);
+void	define_offset(t_matrix **matrix);
 void	init_proj(t_matrix **matrix);
 t_img	init_new_image(t_matrix	**matrix);
 t_matrix	**init_fdf(char *file_name, t_matrix **matrix);
@@ -147,6 +169,12 @@ int		get_width(char *line);
 int		get_height(char *file_name);
 char	**extract_first_part(char *s, int *i);
 char	**ft_split_color(char *s);
+/*-------------map_utils-------------*/
+void	define_switchs(t_matrix **matrix);
+void	define_scale(t_matrix **matrix);
+void	define_rotation(t_matrix **matrix);
+void	define_offset(t_matrix **matrix);
+
 
 
 #endif

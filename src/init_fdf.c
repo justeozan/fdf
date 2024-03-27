@@ -6,34 +6,23 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:23:20 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/26 14:38:55 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/27 13:55:57 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
+
+
 void	init_proj(t_matrix **matrix)
 {
-	double	scale_y;
-	double	scale_x;
-
-	scale_x = (SCALE_FACTOR * WIDTH) / (FDF.width);
-	scale_y = (SCALE_FACTOR * HEIGHT) / (FDF.height);
-	if (scale_x < scale_y)
-		FDF.scale = scale_x;
-	else
-		FDF.scale = scale_y;
-	FDF.angle = 0.80;
-	FDF.is_isometric = 1;
-	FDF.offset_x = (WIDTH - FDF.width * FDF.scale) / 2;
-	FDF.offset_y = (HEIGHT - FDF.height * FDF.scale) / 2;
-	printf("scale = %f, offset_x = %d, offset_y = %d\n", FDF.scale, FDF.offset_x, FDF.offset_y);
+	define_switchs(matrix);
+	define_scale(matrix);
+	define_offset(matrix);
+	define_rotation(matrix);
 	FDF.imgs.x_step = 1;
 	FDF.imgs.y_step = 1;
-	FDF.rot_x = -0.52;
-	FDF.rot_y = 0.52;
-	FDF.rot_z = 0;
-	FDF.depth = 1;
+	FDF.depth = 2.5;
 }
 
 t_img	init_new_image(t_matrix	**matrix)

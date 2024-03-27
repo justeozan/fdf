@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 22:10:59 by marvin            #+#    #+#             */
-/*   Updated: 2024/03/26 14:08:25 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/27 11:26:42 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,19 @@ void	put_pixel(t_img imgs, int x, int y, int color)
 
 void	draw_acute_slope(t_img imgs, t_matrix m0, t_matrix m1)
 {
-	// int	nb_steps;
-	// int	gradient;
+	int	nb_steps;
+	int	gradient;
 
-	// nb_steps = 0;
+	nb_steps = 0;
 	while (m0.x_proj != m1.x_proj)
 	{
-		// if (m0.color != m1.color)
-		// 	gradient = process_color(nb_steps, imgs.x_diff, m0.color, m1.color);
-		// else
-		// 	gradient = m0.color;
+		if (m0.color != m1.color)
+			gradient = process_color(nb_steps, imgs.x_diff, m0.color, m1.color);
+		else
+			gradient = m0.color;
 		if (m0.x_proj >= 0 && m0.x_proj < WIDTH
 			&& m0.y_proj >= 0 && m0.y_proj < HEIGHT)
-			put_pixel(imgs, m0.x_proj, m0.y_proj, m0.color);
+			put_pixel(imgs, m0.x_proj, m0.y_proj, gradient);
 		m0.x_proj += imgs.x_step;
 		if (imgs.decision <= 0)
 			imgs.decision += 2 * imgs.y_diff;
@@ -45,25 +45,25 @@ void	draw_acute_slope(t_img imgs, t_matrix m0, t_matrix m1)
 			m0.y_proj += imgs.y_step;
 			imgs.decision += 2 * (imgs.y_diff - imgs.x_diff);
 		}
-		// nb_steps++;
+		nb_steps++;
 	}
 }
 
 void	draw_obtus_slope(t_img imgs, t_matrix m0, t_matrix m1)
 {
-	// int	nb_steps;
-	// int	gradient;
+	int	nb_steps;
+	int	gradient;
 
-	// nb_steps = 0;
+	nb_steps = 0;
 	while (m0.y_proj != m1.y_proj)
 	{
-		// if (p0.color != p1.color)
-		// 	gradient = process_color(nb_steps, plt.y_diff, p0.color, p1.color);
-		// else
-		// 	gradient = p0.color;
+		if (m0.color != m1.color)
+			gradient = process_color(nb_steps, imgs.y_diff, m0.color, m1.color);
+		else
+			gradient = m0.color;
 		if (m0.x_proj >= 0 && m0.x_proj < WIDTH
 			&& m0.y_proj >= 0 && m0.y_proj < HEIGHT)
-			put_pixel(imgs, m0.x_proj, m0.y_proj, m0.color);
+			put_pixel(imgs, m0.x_proj, m0.y_proj, gradient);
 		m0.y_proj += imgs.y_step;
 		if (imgs.decision <= 0)
 			imgs.decision += 2 * imgs.x_diff;
@@ -72,7 +72,7 @@ void	draw_obtus_slope(t_img imgs, t_matrix m0, t_matrix m1)
 			m0.x_proj += imgs.x_step;
 			imgs.decision += 2 * (imgs.x_diff - imgs.y_diff);
 		}
-		// nb_steps++;
+		nb_steps++;
 	}
 }
 void	init_step(t_img *imgs, t_matrix *m0, t_matrix *m1)

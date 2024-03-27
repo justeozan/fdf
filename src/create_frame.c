@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 11:32:08 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/26 16:05:11 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/27 11:40:35 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,51 +16,23 @@ void	apply_scaling(t_matrix *point, t_matrix **matrix)
 {
 	point->x_proj = point->x * ceil(FDF.scale);
 	point->y_proj = point->y * ceil(FDF.scale);
-	point->z_proj = point->z * 0.15 * FDF.scale * FDF.depth;
+	point->z_proj = point->z * 0.05 * FDF.scale * FDF.depth;
 }
 
-void	apply_offset_2(t_matrix *point, t_matrix **matrix)
+void	apply_offset(t_matrix *point, t_matrix **matrix)
 {
 	point->x_proj = point->x_proj + FDF.offset_x;
 	point->y_proj = point->y_proj + FDF.offset_y;
 }
 
-void	apply_offset(t_matrix *point, t_matrix **matrix)
-{
-	// int	xc_figure;
-	// int	yc_figure;
-	// int	xc_window;
-	// int	yc_window;
-
-	// center_x = point->x_proj - FDF.width / 2;
-	// center_y = point->y_proj - FDF.height / 2;
-	// point->x_proj += point->x_proj + center_x;
-	// point->y_proj += point->y_proj + center_y;
-	// if (FDF.is_isometric != 1)
-	// {
-		// point->x_proj = point->x_proj + FDF.offset_x;
-		// point->y_proj = point->y_proj + FDF.offset_y;
-	apply_offset_2(point, matrix);
-	// }
-	// else
-	// {
-		// xc_window = WIDTH / 2;
-		// yc_window = HEIGHT / 2;
-		// point->x_proj = point->x_proj - xc_window;
-		// point->y_proj = point->y_proj - yc_window;
-		// point->x_proj += WIDTH / 2 + FDF.offset_x;
-		// point->y_proj += HEIGHT / 2 + FDF.offset_y;
-	// }
-}
-
-void	apply_isometric(t_matrix *point, t_matrix **matrix)
-{
-	if (FDF.is_isometric)
-	{
-		point->x_proj = (point->x_proj - point->y_proj) * cos(FDF.angle);
-		point->y_proj = (point->x_proj + point->y_proj) * sin(FDF.angle) - point->z_proj;
-	}
-}
+// void	apply_isometric(t_matrix *point, t_matrix **matrix)
+// {
+// 
+// 	{
+// 		point->x_proj = (point->x_proj - point->y_proj) * cos(FDF.angle);
+// 		point->y_proj = (point->x_proj + point->y_proj) * sin(FDF.angle) - point->z_proj;
+// 	}
+// }
 
 void	init_proj_map(t_matrix **matrix)
 {

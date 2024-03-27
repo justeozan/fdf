@@ -6,7 +6,7 @@
 #    By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/13 19:03:54 by ozasahin          #+#    #+#              #
-#    Updated: 2024/03/26 14:24:07 by ozasahin         ###   ########.fr        #
+#    Updated: 2024/03/27 14:02:48 by ozasahin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ NAME	=	fdf
 
 SRC		=	\
 			src/apply_rotation.c\
+			src/utils/color_utils.c\
 			src/create_frame.c\
 			src/displays.c\
 			src/draw_line.c\
@@ -24,7 +25,8 @@ SRC		=	\
 			src/init_fdf.c\
 			src/key_manager.c\
 			src/main.c\
-			src/map_utils.c
+			src/utils/map_utils.c\
+			src/utils/proj_utils.c
 
 OBJDIR		=	obj
 OBJ			=	$(patsubst src/%.c, obj/%.o, $(SRC))
@@ -60,6 +62,7 @@ obj/%.o:	src/%.c include/fdf.h libft/libft.h mlx_linux/mlx.h Makefile | $(OBJDIR
 
 $(OBJDIR):
 		@mkdir -p $(OBJDIR)
+		@mkdir -p $(OBJDIR)/utils
 
 clean:
 		@$(RM) -r $(OBJDIR)
