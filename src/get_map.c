@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 15:13:03 by marvin            #+#    #+#             */
-/*   Updated: 2024/03/27 16:25:08 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/27 16:32:13 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ int	fill_matrix_children(t_matrix **matrix, char **line2d, int w, int y)
 
 void	fill_matrix_parent(t_matrix **matrix, char *f_name)
 {
-	int	fd;
-	int	y;
+	int		fd;
+	int		y;
 	char	**line2d;
 
 	fd = open(f_name, O_RDONLY);
