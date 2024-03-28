@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:17:47 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/28 16:14:15 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/28 16:19:17 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@
 
 # define WIDTH	1920
 # define HEIGHT	1080
+
+# ifndef M
+#  define M matrix
+# endif
 
 # ifndef SCALE_FACTOR
 #  define SCALE_FACTOR 0.65

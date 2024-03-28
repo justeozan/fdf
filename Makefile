@@ -6,7 +6,7 @@
 #    By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/13 19:03:54 by ozasahin          #+#    #+#              #
-#    Updated: 2024/03/28 16:07:31 by ozasahin         ###   ########.fr        #
+#    Updated: 2024/03/28 16:17:31 by ozasahin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,6 +69,7 @@ $(OBJDIR):
 
 clean:
 		@$(RM) -r $(OBJDIR)
+		@$(RM) -r $(OBJDIR_BONUS)
 		@make clean -C libft -s
 		@make clean -C mlx_linux -s
 		@echo "$(MESSAGE_CLEAN_DONE)"
