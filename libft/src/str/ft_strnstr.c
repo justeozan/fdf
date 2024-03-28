@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 22:20:43 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/26 16:33:21 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/28 15:40:39 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ char	*ft_strnstr(const char *s1, const char *s2, size_t len)
 	}
 	return (NULL);
 }
-
 
 char	*ft_strnstr_2(char *s1, char *s2, size_t len)
 {

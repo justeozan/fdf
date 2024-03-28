@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 09:44:07 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/28 11:07:05 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/28 15:31:41 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	add_color(t_matrix **matrix)
 	int	x;
 
 	y = -1;
-	while (++y < FDF.height)
+	while (++y < matrix[0][0].height)
 	{
 		x = -1;
-		while (++x < FDF.width)
+		while (++x < matrix[0][0].width)
 			if (matrix[y][x].z != 0)
 				matrix[y][x].color = 0xFFFB992;
 	}

@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 14:18:58 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/27 11:47:46 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/28 15:37:38 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,13 @@ void	apply_rot_z(t_matrix *point, double cos_a, double sin_a)
 
 void	apply_rotation(t_matrix *point, t_matrix **matrix)
 {
-	if (FDF.switchs.isometric == 0)
+	if (matrix[0][0].switchs.isometric == 1)
 	{
-		apply_rot_x(point, (double)cos(FDF.rot_x), (double)sin(FDF.rot_x));
-		apply_rot_y(point, (double)cos(FDF.rot_y), (double)sin(FDF.rot_y));
-		apply_rot_z(point, (double)cos(FDF.rot_z), (double)sin(FDF.rot_z));
+		apply_rot_x(point, (double)cos(matrix[0][0].rot_x),
+			(double)sin(matrix[0][0].rot_x));
+		apply_rot_y(point, (double)cos(matrix[0][0].rot_y),
+			(double)sin(matrix[0][0].rot_y));
+		apply_rot_z(point, (double)cos(matrix[0][0].rot_z),
+			(double)sin(matrix[0][0].rot_z));
 	}
 }

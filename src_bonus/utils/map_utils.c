@@ -6,27 +6,11 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:11:35 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/27 15:30:06 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/28 15:22:15 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
-
-void	ft_display_tab2d(char **strs)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (strs[++i])
-	{
-		j = -1;
-		while (strs[i][++j])
-			ft_printf("%c-", strs[i][j]);
-		ft_printf("\n");
-	}
-	// ft_free2d(&strs);
-}
 
 int	get_width(char *line)
 {
@@ -41,25 +25,26 @@ int	get_width(char *line)
 			count++;
 		i++;
 	}
-	free(line);
 	return (count);
 }
 
-int	get_height(char *file_name)
+int	get_height(int *width, char *file_name)
 {
-	int		fd;
 	int		height;
 	char	*line;
+	int		fd;
 
-	fd = open(file_name, O_RDONLY);
 	height = 0;
+	fd = open(file_name, O_RDONLY);
 	line = get_next_line(fd);
-	// line = get_next_line(fd, &line);
+	*width = get_width(line);
 	while (line)
 	{
 		height++;
 		free(line);
 		line = get_next_line(fd);
+		if (!line)
+			break ;
 	}
 	free(line);
 	close(fd);
@@ -81,7 +66,7 @@ char	**extract_first_part(char *s, int *i)
 		j++;
 	strs[0] = (char *)malloc((j + 1) * sizeof(char));
 	if (!strs[0])
-		return (NULL);
+		return (free(strs), NULL);
 	while (++k < j)
 		strs[0][k] = s[k];
 	strs[0][j] = 0;
@@ -92,31 +77,18 @@ char	**extract_first_part(char *s, int *i)
 	return (strs);
 }
 
-char	**ft_split_color(char *s)
+char	*get_color(char *line)
 {
-	char	**strs;
-	int		i;
-	int		j;
+	int	i;
 
-	if (!s)
+	if (!line)
 		return (NULL);
-	strs = extract_first_part(s, &i);
-	if (!strs || !strs[0])
-		return (ft_free2d(strs), NULL);
-	if (ft_strnstr_2(s, ",0x", 3))
-	{
-		strs[1] = (char *)malloc((ft_strlen(s) - i + 1) * sizeof(char));
-		if (!strs[1])
-			return (ft_free2d(strs), NULL);
-		j = 0;
-		while (s[++i])
-		{
-			strs[1][j] = s[i];
-			j++;
-		}
-		strs[1][j] = 0;
-	}
+	i = 0;
+	while (line[i] != 'x' && line[i])
+		line++;
+	if (line[i] == 'x')
+		line++;
 	else
-		strs[1] = NULL;
-	return (strs);
+		return (NULL);
+	return (line);
 }

@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:07:35 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/26 14:09:51 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/28 16:09:48 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	check_args(int ac, char **av)
 			exit_err("Error! bad fd or file empty\n");
 	}
 	else
-		ft_printf("Notice : ./fdf <maps.fdf>\n");
+		exit_err("Notice : ./fdf <maps.fdf>\n");
 	close(fd);
 }
 
@@ -36,9 +36,9 @@ int	main(int ac, char **av)
 	matrix = NULL;
 	check_args(ac, av);
 	matrix = init_fdf(av[1], matrix);
-	mlx_hook(FDF.win, 17, 0, close_normal, matrix);
-	mlx_hook(FDF.win, 2, 1L << 0, manage_key, matrix);
-	mlx_loop_hook(FDF.mlx, frame, matrix);
-	mlx_loop(FDF.mlx);
+	mlx_hook(matrix[0][0].win, 17, 0, close_normal, matrix);
+	mlx_hook(matrix[0][0].win, 2, 1L << 0, manage_key, matrix);
+	mlx_loop_hook(matrix[0][0].mlx, frame, matrix);
+	mlx_loop(matrix[0][0].mlx);
 	return (close_program(matrix, NULL));
 }

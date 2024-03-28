@@ -6,27 +6,11 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:11:35 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/28 14:39:24 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/28 15:22:15 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
-
-void	ft_display_tab2d(char **strs)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (strs[++i])
-	{
-		j = -1;
-		while (strs[i][++j])
-			ft_printf("%c-", strs[i][j]);
-		ft_printf("\n");
-	}
-	// ft_free2d(&strs);
-}
 
 int	get_width(char *line)
 {
@@ -54,10 +38,8 @@ int	get_height(int *width, char *file_name)
 	fd = open(file_name, O_RDONLY);
 	line = get_next_line(fd);
 	*width = get_width(line);
-	// line = get_next_line(fd, &line);
 	while (line)
 	{
-		// ft_printf("line = %s\n", line);
 		height++;
 		free(line);
 		line = get_next_line(fd);
@@ -95,10 +77,10 @@ char	**extract_first_part(char *s, int *i)
 	return (strs);
 }
 
-char	*ft_separate(char *line)
+char	*get_color(char *line)
 {
 	int	i;
-	
+
 	if (!line)
 		return (NULL);
 	i = 0;
@@ -107,35 +89,6 @@ char	*ft_separate(char *line)
 	if (line[i] == 'x')
 		line++;
 	else
-		return(NULL);
+		return (NULL);
 	return (line);
 }
-
-// char	**ft_split_color(char *s)
-// {
-// 	char	**strs;
-// 	int		i;
-// 	int		j;
-
-// 	if (!s)
-// 		return (NULL);
-// 	strs = extract_first_part(s, &i);
-// 	if (!strs)// || !strs[0])
-// 		return (ft_free2d(strs), NULL);
-// 	if (ft_strnstr_2(s, ",0x", 3))
-// 	{
-// 		strs[1] = (char *)malloc((ft_strlen(s) - i + 1) * sizeof(char));
-// 		if (!strs[1])
-// 			return (ft_free2d(strs), NULL);
-// 		j = 0;
-// 		while (s[++i])
-// 		{
-// 			strs[1][j] = s[i];
-// 			j++;
-// 		}
-// 		strs[1][j] = 0;
-// 	}
-// 	else
-// 		strs[1] = NULL;
-// 	return (strs);
-// }
