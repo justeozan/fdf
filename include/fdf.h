@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:17:47 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/28 11:51:47 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/28 14:41:55 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,5 +184,6 @@ int			main(int ac, char **av);
 void		new_image(t_matrix **matrix);
 void		draw_black(t_matrix **matrix);
 void		display_matrix(t_matrix **matrix, int w, int h);
+char		*ft_separate(char *line);
 
 #endif

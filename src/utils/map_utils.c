@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:11:35 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/28 14:01:30 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/28 14:39:24 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,31 +95,47 @@ char	**extract_first_part(char *s, int *i)
 	return (strs);
 }
 
-char	**ft_split_color(char *s)
+char	*ft_separate(char *line)
 {
-	char	**strs;
-	int		i;
-	int		j;
-
-	if (!s)
+	int	i;
+	
+	if (!line)
 		return (NULL);
-	strs = extract_first_part(s, &i);
-	if (!strs)// || !strs[0])
-		return (ft_free2d(strs), NULL);
-	if (ft_strnstr_2(s, ",0x", 3))
-	{
-		strs[1] = (char *)malloc((ft_strlen(s) - i + 1) * sizeof(char));
-		if (!strs[1])
-			return (ft_free2d(strs), NULL);
-		j = 0;
-		while (s[++i])
-		{
-			strs[1][j] = s[i];
-			j++;
-		}
-		strs[1][j] = 0;
-	}
+	i = 0;
+	while (line[i] != 'x' && line[i])
+		line++;
+	if (line[i] == 'x')
+		line++;
 	else
-		strs[1] = NULL;
-	return (strs);
+		return(NULL);
+	return (line);
 }
+
+// char	**ft_split_color(char *s)
+// {
+// 	char	**strs;
+// 	int		i;
+// 	int		j;
+
+// 	if (!s)
+// 		return (NULL);
+// 	strs = extract_first_part(s, &i);
+// 	if (!strs)// || !strs[0])
+// 		return (ft_free2d(strs), NULL);
+// 	if (ft_strnstr_2(s, ",0x", 3))
+// 	{
+// 		strs[1] = (char *)malloc((ft_strlen(s) - i + 1) * sizeof(char));
+// 		if (!strs[1])
+// 			return (ft_free2d(strs), NULL);
+// 		j = 0;
+// 		while (s[++i])
+// 		{
+// 			strs[1][j] = s[i];
+// 			j++;
+// 		}
+// 		strs[1][j] = 0;
+// 	}
+// 	else
+// 		strs[1] = NULL;
+// 	return (strs);
+// }
