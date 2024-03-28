@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:09:36 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/27 16:13:04 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/28 11:02:33 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,14 @@ void	free_matrix(t_matrix **matrix)
 	y = FDF.height;
 	while (--y > 0)
 	{
-		free(matrix[y]);
+		if (matrix[y])
+			free(matrix[y]);
 		matrix[y] = NULL;
 	}
-	free(matrix);
+	if (matrix[0])
+		free(matrix[0]);
+	if (matrix)
+		free(matrix);
 	matrix = NULL;
 }
 

@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:11:35 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/27 15:30:06 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/28 14:01:30 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,25 +41,28 @@ int	get_width(char *line)
 			count++;
 		i++;
 	}
-	free(line);
 	return (count);
 }
 
-int	get_height(char *file_name)
+int	get_height(int *width, char *file_name)
 {
-	int		fd;
 	int		height;
 	char	*line;
+	int		fd;
 
-	fd = open(file_name, O_RDONLY);
 	height = 0;
+	fd = open(file_name, O_RDONLY);
 	line = get_next_line(fd);
+	*width = get_width(line);
 	// line = get_next_line(fd, &line);
 	while (line)
 	{
+		// ft_printf("line = %s\n", line);
 		height++;
 		free(line);
 		line = get_next_line(fd);
+		if (!line)
+			break ;
 	}
 	free(line);
 	close(fd);
@@ -81,7 +84,7 @@ char	**extract_first_part(char *s, int *i)
 		j++;
 	strs[0] = (char *)malloc((j + 1) * sizeof(char));
 	if (!strs[0])
-		return (NULL);
+		return (free(strs), NULL);
 	while (++k < j)
 		strs[0][k] = s[k];
 	strs[0][j] = 0;
@@ -101,7 +104,7 @@ char	**ft_split_color(char *s)
 	if (!s)
 		return (NULL);
 	strs = extract_first_part(s, &i);
-	if (!strs || !strs[0])
+	if (!strs)// || !strs[0])
 		return (ft_free2d(strs), NULL);
 	if (ft_strnstr_2(s, ",0x", 3))
 	{

@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:17:47 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/27 16:22:11 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/28 11:51:47 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ int			process_color(int curr_steps, int tot_steps, int color_ini, int color_end)
 /*-------------map_utils-------------*/
 void		ft_display_tab2d(char **strs);
 int			get_width(char *line);
-int			get_height(char *file_name);
+int			get_height(int *w, char *file_name);
 char		**extract_first_part(char *s, int *i);
 char		**ft_split_color(char *s);
 /*-------------proj_utils-------------*/

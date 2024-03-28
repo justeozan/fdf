@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:24:56 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/26 16:17:24 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/28 14:05:28 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ int	change_base(char *str, char *b, int i, int j)
 		power++;
 		j--;
 	}
+	// ft_printf("nb = %d\n", nb);
+	
 	return (nb);
 }
 
@@ -93,6 +95,8 @@ int	ft_atoi_base(char *str, char *base)
 	int	sign;
 
 	i = 0;
+	// ft_printf("in atoi_base, sec_p = %s\n", str);
+
 	if (!str)
 		return (-1);
 	while (base[i])

@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:25:31 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/27 16:24:11 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/28 13:36:12 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,16 @@ int	ft_free2d(char **strs)
 	unsigned int	i;
 
 	i = 0;
-	if (strs == NULL || *strs == NULL)
+	if (strs == NULL)//*strs == NULL
 		return (-1);
-	while (strs[i])
-		free(strs[i++]);
-	free(strs);
+	while (strs[i] != NULL)
+	{
+		if (strs[i])
+			free(strs[i]);
+		i++;
+	}
+	if (strs)
+		free(strs);
 	return (0);
 }
 

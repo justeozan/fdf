@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   fdf_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:17:47 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/27 16:22:11 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/28 11:13:19 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#ifndef FDF_BONUS_H
+# define FDF_BONUS_H
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -23,9 +23,7 @@
 # define WIDTH	1920
 # define HEIGHT	1080
 
-# ifndef FDF
-#  define FDF matrix[0][0]
-# endif
+# define FDF matrix[0][0]
 
 # define M matrix
 
@@ -173,7 +171,7 @@ void		init_proj(t_matrix **matrix);
 t_img		init_new_image(t_matrix	**matrix);
 t_matrix	**init_fdf(char *file_name, t_matrix **matrix);
 /*-------------key_manager-------------*/
-int 		is_key(int key);
+int			is_key(int key);
 void		do_key(int key, t_matrix **matrix);
 int			manage_key(int key, t_matrix **matrix);
 /*-------------main-------------*/
