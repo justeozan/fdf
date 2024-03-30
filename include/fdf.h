@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sei <sei@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:17:47 by ozasahin          #+#    #+#             */
-/*   Updated: 2024/03/28 16:19:00 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/03/30 16:26:25 by sei              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@
 
 # define WIDTH	1920
 # define HEIGHT	1080
+
+# ifndef M
+#  define M matrix
+# endif
 
 # ifndef SCALE_FACTOR
 #  define SCALE_FACTOR 0.65
