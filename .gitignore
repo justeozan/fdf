@@ -1,5 +1,6 @@
 # Executable
 fdf
+fdf_bonus
 mlx-test
 
 # Extension
@@ -11,3 +12,4 @@ mlx-test
 mlx-linux/
 minilibx-linux/
 obj/
+obj_bonus/
